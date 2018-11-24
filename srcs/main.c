@@ -2,28 +2,27 @@
 
 int			red_cross()
 {
-	system("leaks RTv1");
-	exit(0);
+	// system("leaks RTv1");
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-int		expose_hook(t_env *e)
+int		expose_hook(t_env *env)
 {
-	display(e);
+	display(env);
 	return (1);
 }
 
-int		main(int ac, char **av)
+int		main(int argc, char **argv)
 {
-	t_env e;
+	t_env env;
 
-	init_env_preparsing(&e);
-	parser(&e, ac, av);
-	init_env_postparsing(&e);
-	mlx_hook(e.win, 2, 1L << 0, &key_press, &e);
-	mlx_hook(e.win, 2, 1L << 0, &key_release, &e);
-	mlx_expose_hook(e.win, expose_hook, &e);
-	mlx_hook(e.win, 17, 1L << 0, red_cross, &e);
-	mlx_loop(e.mlx);
+	init_env_preparsing(&env);
+	parser(&env, argc, argv);
+	init_env_postparsing(&env);
+	mlx_hook(env.win, 2, 1L << 0, &key_press, &env);
+	mlx_expose_hook(env.win, expose_hook, &env);
+	mlx_hook(env.win, 17, 1L << 0, red_cross, &env);
+	mlx_loop(env.mlx);
 	return (1);
 }
