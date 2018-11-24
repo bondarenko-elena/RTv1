@@ -1,12 +1,12 @@
 #include "../includes/rtv1.h"
 
-int		typeconvert(t_env *e, char *stype)
+int		convert_obj_type(t_env *e, char *stype)
 {
 	if (ft_strstr(stype, "plane"))
 		return (0);
 	else if (ft_strstr(stype, "sphere"))
 		return (1);
-	else if (ft_strstr(stype, "cylinder"))
+	else if (ft_strstr(stype, "cylinder"))	
 		return (2);
 	else if (ft_strstr(stype, "cone"))
 		return (3);
@@ -69,7 +69,7 @@ void	get_content(t_env *env, t_list *list)
 		if (ft_strstr(list->content, "object"))
 		{
 			init_obj(&obj);
-			obj.type = typeconvert(env, ft_strconc(list->content, '(', ')'));
+			obj.type = convert_obj_type(env, ft_strconc(list->content, '(', ')'));
 			while (list && !ft_strstr(list->content, "{"))
 				list = list->next;
 			while (list && !ft_strstr(list->content, "}"))

@@ -62,11 +62,9 @@ void	display(t_env *e)
 		while (++x < e->screen_width)
 		{
 			e->col = ray_tracing(e, x, y);
-			e->col.x = pow(e->col.x, GAMMA);
-			e->col.y = pow(e->col.y, GAMMA);
-			e->col.z = pow(e->col.z, GAMMA);
+			e->col = (t_vec3){pow(e->col.x, GAMMA), pow(e->col.y, GAMMA), e->col.z = pow(e->col.z, GAMMA)};
 			vecclamp(&e->col, 0.0, 1.0);
-			pixel_put(e, x, y);
+			put_pixel(e, x, y);
 		}
 	}
 }

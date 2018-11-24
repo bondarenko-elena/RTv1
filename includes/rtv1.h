@@ -76,7 +76,7 @@ t_obj					*new_obj(t_obj *obj);
 void					obj_push_back(t_env *e, t_obj *obj);
 void					pre_init_env(t_env *e);
 void					post_init_env(t_env *e);
-void					pixel_put(t_env *e, int x, int y);
+void					put_pixel(t_env *e, int x, int y);
 void					display(t_env *e);
 void					get_lighting(t_env *e, t_vec3 *col, t_vec3 *pos);
 t_obj					*inter_object(t_env *e, t_vec3 *ro, t_vec3 *rd, \

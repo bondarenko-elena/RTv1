@@ -1,6 +1,6 @@
 #include "../includes/rtv1.h"
 
-void	pixel_put(t_env *e, int x, int y)
+void	put_pixel(t_env *e, int x, int y)
 {
 	int		color;
 
