@@ -83,7 +83,7 @@ void	get_object(t_env *e, t_list *list)
 	}
 }
 
-void	file_reader(t_env *e, t_list *list)
+void	parse_file(t_env *e, t_list *list)
 {
 	while (list)
 	{

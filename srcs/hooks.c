@@ -4,7 +4,7 @@ int		key_press(int keycode, t_env *env)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(env->mlx, env->win);
+		mlx_destroy_window(env->mlx_init, env->win);
 		// system("leaks RTv1");
 		exit(EXIT_SUCCESS);
 	}
@@ -13,7 +13,7 @@ int		key_press(int keycode, t_env *env)
 
 int			red_cross(t_env *env)
 {
-	mlx_destroy_window(env->mlx, env->win);
+	mlx_destroy_window(env->mlx_init, env->win);
 	// system("leaks RTv1");
 	exit(EXIT_SUCCESS);
 	return (0);
