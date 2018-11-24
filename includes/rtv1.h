@@ -64,7 +64,6 @@ typedef struct			s_env
 int						expose_hook(t_env *e);
 int						key_press(int keycode, t_env *e);
 int						key_release(int keycode, t_env *e);
-void					parser(t_env *e, char **av);
 void					file_reader(t_env *e, t_list *list);
 void					get_name(t_env *e, char *info);
 void					get_camera(t_env *e, char *info, int type);
@@ -86,5 +85,7 @@ double					inter_shadows(t_env *e, t_vec3 *pos, t_vec3 *lpos);
 t_vec3					lambert(t_obj *obj, t_vec3 *nor, t_vec3 *pos);
 double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
 int						red_cross(t_env *env);
+int						get_file(t_env *env, char *filename);
+void 					exit_w_error(char *msg);
 
 #endif

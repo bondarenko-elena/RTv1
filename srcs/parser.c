@@ -1,6 +1,6 @@
 #include "../includes/rtv1.h"
 
-int		get_file(t_env *e, char *filename)
+int		get_file(t_env *env, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -15,15 +15,6 @@ int		get_file(t_env *e, char *filename)
 	if (!list)
 		return (0);
 	close(fd);
-	file_reader(e, list);
+	file_reader(env, list);
 	return (1);
-}
-
-void	parser(t_env *e, char **av)
-{
-	if (get_file(e, av[1]) == 0)
-	{
-		ft_putstr_fd("rtv1: Incorrect parameter\n", 2);
-		exit(EXIT_FAILURE);
-	}
 }
