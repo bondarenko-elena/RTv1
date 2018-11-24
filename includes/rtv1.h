@@ -45,7 +45,7 @@ typedef struct			s_obj
 
 typedef struct			s_env
 {
-	void				*mlx;
+	void				*mlx_init;
 	void				*win;
 	int					screen_height;
 	int					screen_width;
@@ -85,7 +85,7 @@ double					inter_shadows(t_env *e, t_vec3 *pos, t_vec3 *lpos);
 t_vec3					lambert(t_obj *obj, t_vec3 *nor, t_vec3 *pos);
 double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
 int						red_cross(t_env *env);
-int						get_file(t_env *env, char *filename);
+int						open_file(t_env *env, char *filename);
 void 					exit_w_error(char *msg);
 
 #endif
