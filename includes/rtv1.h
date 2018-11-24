@@ -21,7 +21,8 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-# define ESC 65307
+// debian --> # define ESC 65307
+# define ESC 53
 # define S 115
 # define W 119
 # define A 97

@@ -1,16 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 16:56:05 by qmuntada          #+#    #+#             */
-/*   Updated: 2015/02/02 19:34:37 by qmuntada         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/rtv1.h"
 
-#include "rtv1.h"
+int			red_cross()
+{
+	system("leaks RTv1");
+	exit(0);
+	return (0);
+}
 
 int		expose_hook(t_env *e)
 {
@@ -28,6 +23,7 @@ int		main(int ac, char **av)
 	mlx_hook(e.win, 2, 1L << 0, &key_press, &e);
 	mlx_hook(e.win, 2, 1L << 0, &key_release, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
+	mlx_hook(e.win, 17, 1L << 0, red_cross, &e);
 	mlx_loop(e.mlx);
 	return (1);
 }
