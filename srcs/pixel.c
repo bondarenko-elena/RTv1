@@ -7,5 +7,5 @@ void	pixel_put(t_env *e, int x, int y)
 	color = (int)(e->col.z * 256) % 256;
 	color += ((int)(e->col.y * 256) % 256) * 256;
 	color += ((int)(e->col.x * 256) % 256) * 256 * 256;
-	mlx_pixel_put(e->mlx_init, e->win, x, y, color);
+	mlx_pixel_put(e->mlx_init, e->window, x, y, color);
 }

@@ -46,7 +46,7 @@ typedef struct			s_obj
 typedef struct			s_env
 {
 	void				*mlx_init;
-	void				*win;
+	void				*window;
 	int					screen_height;
 	int					screen_width;
 	t_vec3				cam_pos;

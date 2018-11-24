@@ -87,9 +87,9 @@ void	parse_file(t_env *e, t_list *list)
 {
 	while (list)
 	{
-		if (strstr(list->content, "scene"))
+		if (ft_strstr(list->content, "scene"))
 			get_scene(e, list);
-		else if (strstr(list->content, "content"))
+		else if (ft_strstr(list->content, "content"))
 			get_object(e, list);
 		list = list->next;
 	}

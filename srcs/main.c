@@ -18,9 +18,9 @@ int		main(int argc, char **argv)
 		if (open_file(&env, argv[1]) == 0)
 			exit_w_error("Incorrect parameter.");
 		post_init_env(&env);
-		mlx_hook(env.win, 2, 1L << 0, key_press, &env);
-		mlx_hook(env.win, 17, 1L << 0, red_cross, &env);
-		mlx_hook(env.win, 12, 1L << 0, expose_hook, &env);
+		mlx_hook(env.window, 2, 1L << 0, key_press, &env);
+		mlx_hook(env.window, 17, 1L << 0, red_cross, &env);
+		mlx_hook(env.window, 12, 1L << 0, expose_hook, &env);
 		mlx_loop(env.mlx_init);
 	}
 	if (argc > 2)

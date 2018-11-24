@@ -19,7 +19,6 @@ void	pre_init_env(t_env *env)
 
 void	post_init_env(t_env *env)
 {
-	env->win = mlx_new_window(env->mlx_init, env->screen_width, \
-			env->screen_height, env->screen_name);
+	env->window = mlx_new_window(env->mlx_init, env->screen_width, env->screen_height, env->screen_name);
 	env->ln = 1.0 / env->ln;
 }
