@@ -64,7 +64,7 @@ typedef struct			s_env
 int						expose_hook(t_env *e);
 int						key_press(int keycode, t_env *e);
 int						key_release(int keycode, t_env *e);
-void					parser(t_env *e, int ac, char **av);
+void					parser(t_env *e, char **av);
 void					file_reader(t_env *e, t_list *list);
 void					get_name(t_env *e, char *info);
 void					get_camera(t_env *e, char *info, int type);

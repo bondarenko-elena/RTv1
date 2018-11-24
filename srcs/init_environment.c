@@ -2,13 +2,13 @@
 
 void	pre_init_env(t_env *env)
 {
-	t_vec3	normedemerde;
+	// t_vec3	tmp;
 
 	env->mlx = mlx_init();
-	normedemerde = (t_vec3){0, 1, -5};
-	env->cam_pos = normedemerde;
-	normedemerde = (t_vec3){0, 1, 0};
-	env->cam_dir = normedemerde;
+	// tmp = (t_vec3){0, 1, -5};
+	env->cam_pos = (t_vec3){0, 1, -5};
+	// tmp = (t_vec3){0, 1, 0};
+	env->cam_dir = (t_vec3){0, 1, 0};
 	env->obj = NULL;
 	env->objs = NULL;
 	env->ln = 0;

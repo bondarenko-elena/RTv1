@@ -19,13 +19,8 @@ int		get_file(t_env *e, char *filename)
 	return (1);
 }
 
-void	parser(t_env *e, int ac, char **av)
+void	parser(t_env *e, char **av)
 {
-	if (ac < 2)
-	{
-		ft_putstr_fd("rtv1: No parameter found\n", 2);
-		exit(EXIT_FAILURE);
-	}
 	if (get_file(e, av[1]) == 0)
 	{
 		ft_putstr_fd("rtv1: Incorrect parameter\n", 2);
