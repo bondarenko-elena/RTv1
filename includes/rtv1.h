@@ -85,5 +85,6 @@ t_obj					*inter_object(t_env *e, t_vec3 *ro, t_vec3 *rd, \
 double					inter_shadows(t_env *e, t_vec3 *pos, t_vec3 *lpos);
 t_vec3					lambert(t_obj *obj, t_vec3 *nor, t_vec3 *pos);
 double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
+int						red_cross(t_env *env);
 
 #endif

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME := RTv1
-SRC := display.c init_environment.c event.c get.c get2.c inter.c light.c light2.c main.c \
+SRC := display.c init_environment.c hooks.c get.c get2.c inter.c light.c light2.c main.c \
 		obj.c parser.c pixel.c reader.c shadows.c
 
 CC := gcc
