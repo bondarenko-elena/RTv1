@@ -1,0 +1,46 @@
+scene
+{
+	name(SCENE1)
+	cam_pos(0 1 10)
+	cam_dir(0 1 0)
+	render(1600 900)
+}
+
+content
+{
+	object(light)
+	{
+		pos(2 2 0)
+		color(256 256 192)
+		power(75);
+	}
+	object(cone)
+	{
+		pos(5 2 -3)
+	}
+	object(cylinder)
+	{
+		size(100)
+		pos(-2 0 -2)
+	}
+	object(plane)
+	{
+		rot(0 1 0)
+		pos(0 -1 0)
+	}
+	object(plane)
+	{
+		rot(0 0 90)
+		pos(0 0 -30)
+	}
+	object(sphere)
+	{
+		size(300)
+		pos(-1 0 -10)
+	}
+	object(sphere)
+	{
+		size(100)
+		pos(-5 -1 0)
+	}
+}
