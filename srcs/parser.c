@@ -36,7 +36,7 @@ void	get_scene(t_env *e, t_list *list)
 	}
 }
 
-void	get_objectinfo(t_list *list, t_obj *obj)
+void	get_obj_info(t_list *list, t_obj *obj)
 {
 	t_vec3	vec;
 
@@ -58,26 +58,26 @@ void	get_objectinfo(t_list *list, t_obj *obj)
 		get_double(obj, ft_strconc(list->content, '(', ')'), 1);
 }
 
-void	get_object(t_env *e, t_list *list)
+void	get_content(t_env *e, t_list *list)
 {
 	t_obj	obj;
 
-	while (list && !strstr(list->content, "{"))
+	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
-	while (list && !strstr(list->content, "}"))
+	while (list && !ft_strstr(list->content, "}"))
 	{
-		if (strstr(list->content, "object"))
+		if (ft_strstr(list->content, "object"))
 		{
-			objinit(&obj);
+			init_obj(&obj);
 			obj.type = typeconvert(e, ft_strconc(list->content, '(', ')'));
-			while (list && !strstr(list->content, "{"))
+			while (list && !ft_strstr(list->content, "{"))
 				list = list->next;
-			while (list && !strstr(list->content, "}"))
+			while (list && !ft_strstr(list->content, "}"))
 			{
-				get_objectinfo(list, &obj);
+				get_obj_info(list, &obj);
 				list = list->next;
 			}
-			objpushback(e, &obj);
+			obj_push_back(e, &obj);
 		}
 		list = list->next;
 	}
@@ -90,7 +90,7 @@ void	parse_file(t_env *e, t_list *list)
 		if (ft_strstr(list->content, "scene"))
 			get_scene(e, list);
 		else if (ft_strstr(list->content, "content"))
-			get_object(e, list);
+			get_content(e, list);
 		list = list->next;
 	}
 }

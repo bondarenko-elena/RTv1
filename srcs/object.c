@@ -1,6 +1,20 @@
 #include "../includes/rtv1.h"
 
-void	objinit(t_obj *obj)
+t_obj	*new_obj(t_obj *obj)
+{
+	t_obj	*ret;
+
+	ret = malloc(sizeof(t_obj));
+	ret->type = obj->type;
+	ret->size = obj->size / 100.0;
+	ret->power = obj->power / 100.0;
+	ret->pos = obj->pos;
+	ret->rot = obj->rot;
+	ret->color = obj->color;
+	return (ret);
+}
+
+void	init_obj(t_obj *obj)
 {
 	t_vec3	normedemerde;
 
@@ -16,21 +30,7 @@ void	objinit(t_obj *obj)
 	obj->color.z = 0.9;
 }
 
-t_obj	*objnew(t_obj *obj)
-{
-	t_obj	*ret;
-
-	ret = malloc(sizeof(t_obj));
-	ret->type = obj->type;
-	ret->size = obj->size / 100.0;
-	ret->power = obj->power / 100.0;
-	ret->pos = obj->pos;
-	ret->rot = obj->rot;
-	ret->color = obj->color;
-	return (ret);
-}
-
-void	objpushback(t_env *e, t_obj *obj)
+void	obj_push_back(t_env *e, t_obj *obj)
 {
 	t_obj	*cur;
 
@@ -39,8 +39,8 @@ void	objpushback(t_env *e, t_obj *obj)
 	{
 		while (cur->next)
 			cur = cur->next;
-		cur->next = objnew(obj);
+		cur->next = new_obj(obj);
 	}
 	else
-		e->obj = objnew(obj);
+		e->obj = new_obj(obj);
 }
