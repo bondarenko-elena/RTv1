@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rtv1.h"
 
 int		ssphere(t_obj *obj, t_vec3 *ro, t_vec3 *rd, double tmin)
 {

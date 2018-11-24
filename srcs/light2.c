@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rtv1.h"
 
 t_vec3	lambert(t_obj *obj, t_vec3 *nor, t_vec3 *pos)
 {

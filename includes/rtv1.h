@@ -29,6 +29,8 @@
 # define D 100
 # define FOV 2.0
 # define GAMMA 1.0
+# define HEIGHT 1000
+# define WIDTH 1000
 
 typedef struct			s_obj
 {
@@ -73,8 +75,8 @@ void					get_objvec(t_vec3 *vec, char *info);
 void					objinit(t_obj *obj);
 t_obj					*objnew(t_obj *obj);
 void					objpushback(t_env *e, t_obj *obj);
-void					init_env_preparsing(t_env *e);
-void					init_env_postparsing(t_env *e);
+void					pre_init_env(t_env *e);
+void					post_init_env(t_env *e);
 void					pixel_put(t_env *e, int x, int y);
 void					display(t_env *e);
 void					get_lighting(t_env *e, t_vec3 *col, t_vec3 *pos);
