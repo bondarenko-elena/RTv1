@@ -42,35 +42,3 @@ void	get_double(t_obj *obj, char *info, int type)
 	else
 		ft_putstr_fd("RTv1: Error while loading an object size\n", 2);
 }
-
-void	get_name(t_env *e, char *info)
-{
-	if (info)
-		e->screen_name = ft_strdup(info);
-	else
-		ft_putstr_fd("RTv1: Error while loading scene name\n", 2);
-}
-
-void	get_camera(t_env *e, char *info, int type)
-{
-	char	**cam_info;
-
-	if (info)
-	{
-		cam_info = ft_strsplit(info, ' ');
-		if (type == 0)
-		{
-			e->cam_pos.x = ft_atoi(cam_info[0]);
-			e->cam_pos.y = ft_atoi(cam_info[1]);
-			e->cam_pos.z = ft_atoi(cam_info[2]);
-		}
-		else if (type == 1)
-		{
-			e->cam_dir.x = ft_atoi(cam_info[0]);
-			e->cam_dir.y = ft_atoi(cam_info[1]);
-			e->cam_dir.z = ft_atoi(cam_info[2]);
-		}
-	}
-	else
-		ft_putstr_fd("RTv1: Error while loading camera info\n", 2);
-}
