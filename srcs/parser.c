@@ -31,13 +31,6 @@ void	get_vector(t_vec3 *vec, char *content)
 		vec->y = ft_atoi(content_splitted[1]);
 		vec->z = ft_atoi(content_splitted[2]);
 	}
-	else
-	{
-		// vec = (t_vec3*){2, 1, -5};
-		vec->x = 2;
-		vec->y = 1;
-		vec->z = -5;
-	}
 }
 
 void	get_double(t_obj *obj, char *content, int check)
@@ -48,11 +41,6 @@ void	get_double(t_obj *obj, char *content, int check)
 			obj->size = ft_clamp(ft_atoi(content), 1.0, 50000);
 		else if (check == 1)
 			obj->power = ft_clamp(ft_atoi(content), 0.0, 99.0);
-	}
-	else
-	{
-		obj->size = 100;
-		obj->power = 50;
 	}
 }
 
@@ -67,8 +55,6 @@ void	get_color(char *content, t_obj *obj)
 		obj->color.y = ft_clamp(ft_atoi(content_splitted[1]) / 256.0, 0.0, 1.0);
 		obj->color.z = ft_clamp(ft_atoi(content_splitted[2]) / 256.0, 0.0, 1.0);
 	}
-	else
-		obj->color = (t_vec3){138, 43, 226};
 }
 
 void	get_obj_info(t_list *list, t_obj *obj)
