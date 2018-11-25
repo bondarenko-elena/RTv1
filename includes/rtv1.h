@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 16:51:43 by qmuntada          #+#    #+#             */
-/*   Updated: 2015/02/06 18:20:16 by qmuntada         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef RTV1_H
 # define RTV1_H
 
@@ -67,7 +55,7 @@ int						key_release(int keycode, t_env *e);
 void					parse_file(t_env *e, t_list *list);
 void					get_camera(t_env *e, char *info, int type);
 void					get_double(t_obj *obj, char *info, int type);
-void					get_objvec(t_vec3 *vec, char *info);
+void					get_vector(t_vec3 *vec, char *content);
 void					init_obj(t_obj *obj);
 t_obj					*new_obj(t_obj *obj);
 void					obj_push_back(t_env *e, t_obj *obj);

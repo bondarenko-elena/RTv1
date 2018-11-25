@@ -20,17 +20,40 @@ int		convert_obj_type(t_env *e, char *stype)
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-void	get_double(t_obj *obj, char *info, int type)
+void	get_vector(t_vec3 *vec, char *content)
 {
-	if (info)
+	char	**content_splitted;
+
+	if (content)
 	{
-		if (type == 0)
-			obj->size = ft_clamp(ft_atoi(info), 1.0, 50000);
-		else if (type == 1)
-			obj->power = ft_clamp(ft_atoi(info), 0.0, 99.0);
+		content_splitted = ft_strsplit(content, ' ');
+		vec->x = ft_atoi(content_splitted[0]);
+		vec->y = ft_atoi(content_splitted[1]);
+		vec->z = ft_atoi(content_splitted[2]);
 	}
 	else
-		ft_putstr_fd("RTv1: Error while loading an object size\n", 2);
+	{
+		// vec = (t_vec3*){2, 1, -5};
+		vec->x = 2;
+		vec->y = 1;
+		vec->z = -5;
+	}
+}
+
+void	get_double(t_obj *obj, char *content, int check)
+{
+	if (content)
+	{
+		if (check == 0)
+			obj->size = ft_clamp(ft_atoi(content), 1.0, 50000);
+		else if (check == 1)
+			obj->power = ft_clamp(ft_atoi(content), 0.0, 99.0);
+	}
+	else
+	{
+		obj->size = 100;
+		obj->power = 50;
+	}
 }
 
 void	get_color(char *content, t_obj *obj)
@@ -58,12 +81,12 @@ void	get_obj_info(t_list *list, t_obj *obj)
 		get_double(obj, ft_strconc(list->content, '(', ')'), 0);
 	else if (ft_strstr(list->content, "pos"))
 	{
-		get_objvec(&vec, ft_strconc(list->content, '(', ')'));
+		get_vector(&vec, ft_strconc(list->content, '(', ')'));
 		obj->pos = vec;
 	}
 	else if (ft_strstr(list->content, "rot"))
 	{
-		get_objvec(&vec, ft_strconc(list->content, '(', ')'));
+		get_vector(&vec, ft_strconc(list->content, '(', ')'));
 		obj->rot = vec;
 	}
 	else if (ft_strstr(list->content, "power"))
