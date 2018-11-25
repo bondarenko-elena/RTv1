@@ -70,7 +70,7 @@ void	get_content(t_env *env, t_list *list)
 
 /////////////////////////////////////////////////////////////////////////////////
 
-void	get_scene_camera(t_env *env, char *content, int check)
+void	get_camera(t_env *env, char *content, int check)
 {
 	char	**content_splitted;
 
@@ -104,9 +104,9 @@ void	get_scene(t_env *env, t_list *list)
 				env->screen_name = ft_strdup(ft_strconc(list->content, '(', ')'));
 		}
 		else if (ft_strstr(list->content, "cam_pos"))
-			get_scene_camera(env, ft_strconc(list->content, '(', ')'), 0);
+			get_camera(env, ft_strconc(list->content, '(', ')'), 0);
 		else if (ft_strstr(list->content, "cam_dir"))
-			get_scene_camera(env, ft_strconc(list->content, '(', ')'), 1);
+			get_camera(env, ft_strconc(list->content, '(', ')'), 1);
 		else if (ft_strstr(list->content, "render"))
 		{
 			if (ft_strconc(list->content, '(', ')'))
