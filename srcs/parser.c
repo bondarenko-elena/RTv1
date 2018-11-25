@@ -18,14 +18,26 @@ int		convert_obj_type(t_env *e, char *stype)
 	return (-1);
 }
 
+////////////////////////////////////////////////////////////////////////////////////
 
+void	get_color(t_list *list, t_obj *obj)
+{
+	if (ft_strconc(list->content, '(', ')'))
+	{
+		obj->color.x = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[0]) / 256.0, 0.0, 1.0);
+		obj->color.y = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[1]) / 256.0, 0.0, 1.0);
+		obj->color.z = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[2]) / 256.0, 0.0, 1.0);
+	}
+	else
+		obj->color = (t_vec3){138, 43, 226};
+}
 
 void	get_obj_info(t_list *list, t_obj *obj)
 {
 	t_vec3	vec;
 
 	if (ft_strstr(list->content, "color"))
-		get_color(obj, ft_strconc(list->content, '(', ')'));
+		get_color(list, obj);
 	else if (ft_strstr(list->content, "size"))
 		get_double(obj, ft_strconc(list->content, '(', ')'), 0);
 	else if (ft_strstr(list->content, "pos"))
@@ -66,9 +78,6 @@ void	get_content(t_env *env, t_list *list)
 		list = list->next;
 	}
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////
 
 void	get_camera(t_env *env, char *content, int check)
 {

@@ -15,21 +15,6 @@ void	get_objvec(t_vec3 *vec, char *info)
 		ft_putstr_fd("RTv1: Error while loading object vector info\n", 2);
 }
 
-void	get_color(t_obj *obj, char *info)
-{
-	char	**color_info;
-
-	if (info)
-	{
-		color_info = ft_strsplit(info, ' ');
-		obj->color.x = ft_clamp(ft_atoi(color_info[0]) / 256.0, 0.0, 1.0);
-		obj->color.y = ft_clamp(ft_atoi(color_info[1]) / 256.0, 0.0, 1.0);
-		obj->color.z = ft_clamp(ft_atoi(color_info[2]) / 256.0, 0.0, 1.0);
-	}
-	else
-		ft_putstr_fd("RTv1: Error while loading an object color\n", 2);
-}
-
 void	get_double(t_obj *obj, char *info, int type)
 {
 	if (info)

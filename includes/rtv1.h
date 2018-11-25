@@ -66,7 +66,6 @@ int						key_press(int keycode, t_env *e);
 int						key_release(int keycode, t_env *e);
 void					parse_file(t_env *e, t_list *list);
 void					get_camera(t_env *e, char *info, int type);
-void					get_color(t_obj *obj, char *info);
 void					get_double(t_obj *obj, char *info, int type);
 void					get_objvec(t_vec3 *vec, char *info);
 void					init_obj(t_obj *obj);
@@ -85,5 +84,6 @@ double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
 int						red_cross(t_env *env);
 int						open_file(t_env *env, char *filename);
 void 					exit_w_error(char *msg);
+void					get_color(t_list *list, t_obj *obj);
 
 #endif
