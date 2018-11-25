@@ -18,23 +18,7 @@ int		convert_obj_type(t_env *e, char *stype)
 	return (-1);
 }
 
-void	get_scene(t_env *e, t_list *list)
-{
-	while (list && !ft_strstr(list->content, "{"))
-		list = list->next;
-	while (list && !ft_strstr(list->content, "}"))
-	{
-		if (ft_strstr(list->content, "name"))
-			get_name(e, ft_strconc(list->content, '(', ')'));
-		else if (ft_strstr(list->content, "cam_pos"))
-			get_camera(e, ft_strconc(list->content, '(', ')'), 0);
-		else if (ft_strstr(list->content, "cam_dir"))
-			get_camera(e, ft_strconc(list->content, '(', ')'), 1);
-		else if (ft_strstr(list->content, "render"))
-			get_render(e, ft_strconc(list->content, '(', ')'));
-		list = list->next;
-	}
-}
+
 
 void	get_obj_info(t_list *list, t_obj *obj)
 {
@@ -79,6 +63,24 @@ void	get_content(t_env *env, t_list *list)
 			}
 			obj_push_back(env, &obj);
 		}
+		list = list->next;
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////
+void	get_scene(t_env *e, t_list *list)
+{
+	while (list && !ft_strstr(list->content, "{"))
+		list = list->next;
+	while (list && !ft_strstr(list->content, "}"))
+	{
+		if (ft_strstr(list->content, "name"))
+			get_name(e, ft_strconc(list->content, '(', ')'));
+		else if (ft_strstr(list->content, "cam_pos"))
+			get_camera(e, ft_strconc(list->content, '(', ')'), 0);
+		else if (ft_strstr(list->content, "cam_dir"))
+			get_camera(e, ft_strconc(list->content, '(', ')'), 1);
+		else if (ft_strstr(list->content, "render"))
+			get_render(e, ft_strconc(list->content, '(', ')'));
 		list = list->next;
 	}
 }
