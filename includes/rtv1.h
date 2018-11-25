@@ -84,6 +84,6 @@ double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
 int						red_cross(t_env *env);
 int						open_file(t_env *env, char *filename);
 void 					exit_w_error(char *msg);
-void					get_color(t_list *list, t_obj *obj);
+void					get_color(char *content, t_obj *obj);
 
 #endif
