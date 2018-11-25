@@ -70,20 +70,7 @@ void	get_content(t_env *env, t_list *list)
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// void	get_scene_render(t_env *env, char *content)
-// {
-// 	char	**content_splitted;
-
-// 	if (content)
-// 	{
-// 		content_splitted = ft_strsplit(content, ' ');
-// 		env->screen_width = ft_clamp(ft_atoi(content_splitted[0]), 10, 5000);
-// 		env->screen_height = ft_clamp(ft_atoi(content_splitted[1]), 10, 5000);
-// 	}
-// }
-
-
-void	get_camera(t_env *env, char *content, int check)
+void	get_scene_camera(t_env *env, char *content, int check)
 {
 	char	**content_splitted;
 
@@ -107,8 +94,6 @@ void	get_camera(t_env *env, char *content, int check)
 
 void	get_scene(t_env *env, t_list *list)
 {
-	// char	**content_splitted;
-
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
 	while (list && !ft_strstr(list->content, "}"))
@@ -119,17 +104,16 @@ void	get_scene(t_env *env, t_list *list)
 				env->screen_name = ft_strdup(ft_strconc(list->content, '(', ')'));
 		}
 		else if (ft_strstr(list->content, "cam_pos"))
-			get_camera(env, ft_strconc(list->content, '(', ')'), 0);
+			get_scene_camera(env, ft_strconc(list->content, '(', ')'), 0);
 		else if (ft_strstr(list->content, "cam_dir"))
-			get_camera(env, ft_strconc(list->content, '(', ')'), 1);
+			get_scene_camera(env, ft_strconc(list->content, '(', ')'), 1);
 		else if (ft_strstr(list->content, "render"))
 		{
-				if (ft_strconc(list->content, '(', ')'))
-				{
-					// content_splitted = ft_strsplit(ft_strconc(list->content, '(', ')'), ' ');
-					env->screen_width = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[0]), 10, 5000);
-					// env->screen_height = ft_clamp(ft_atoi(content_splitted[1]), 10, 5000);
-				}
+			if (ft_strconc(list->content, '(', ')'))
+			{
+				env->screen_width = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[0]), 10, 5000);
+				env->screen_height = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[1]), 10, 5000);
+			}
 		}
 		list = list->next;
 	}
