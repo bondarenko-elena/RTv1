@@ -20,7 +20,7 @@ int		convert_obj_type(t_env *e, char *stype)
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-void	get_vector(t_vec3 *vec, char *content)
+void	get_vector(t_vector *vec, char *content)
 {
 	char	**content_splitted;
 
@@ -59,7 +59,7 @@ void	get_color(char *content, t_obj *obj)
 
 void	get_obj_info(t_list *list, t_obj *obj)
 {
-	t_vec3	vec;
+	t_vector	vec;
 
 	if (ft_strstr(list->content, "color"))
 		get_color(ft_strconc(list->content, '(', ')'), obj);

@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 17:57:31 by qmuntada          #+#    #+#             */
-/*   Updated: 2014/11/08 14:59:19 by qmuntada         ###   ########.fr       */
+/*   Created: 2017/11/25 17:18:40 by olbondar          #+#    #+#             */
+/*   Updated: 2017/11/25 18:13:48 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *s1, const char *s2)
+char	*ft_strstr(const char *big, const char *little)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	char	*b;
+	char	*l;
 
-	i = 0;
-	j = 0;
-	if (*s2 == '\0')
-		return ((char *)s1);
-	while (s1[i])
+	b = (char *)big;
+	l = (char *)little;
+	if (*l == '\0')
+		return (b);
+	while (*b != '\0')
 	{
-		while (s1[i] == s2[j])
+		i = 0;
+		while (l[i] != '\0' && l[i] == b[i])
 		{
 			i++;
-			j++;
-			if (!s2[j])
-				return (char *)s1 + (i - ft_strlen(s2));
 		}
-		j = 0;
-		i++;
+		if (l[i] == '\0')
+			return (b);
+		b++;
 	}
 	return (NULL);
 }

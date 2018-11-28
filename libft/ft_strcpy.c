@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 16:45:21 by qmuntada          #+#    #+#             */
-/*   Updated: 2014/11/04 19:27:17 by qmuntada         ###   ########.fr       */
+/*   Created: 2017/11/25 17:12:21 by olbondar          #+#    #+#             */
+/*   Updated: 2017/11/25 17:29:19 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dst, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	size_t	length;
-	size_t	index;
+	size_t i;
 
-	length = ft_strlen(src);
-	index = -1;
-	while (++index <= length && src[index] != '\0')
-		*(dst + index) = *(src + index)
-				;
-	dst[index] = '\0';
-	return (dst);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

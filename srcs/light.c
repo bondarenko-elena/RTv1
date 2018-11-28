@@ -1,21 +1,21 @@
 #include "../includes/rtv1.h"
 
-t_vec3	setnor(t_obj *obj, t_vec3 *pos)
+t_vector	setnor(t_obj *obj, t_vector *pos)
 {
-	t_vec3	nor;
+	t_vector	nor;
 
-	nor = (t_vec3){0.0, 1.0, 0.0};
+	nor = (t_vector){0.0, 1.0, 0.0};
 	if (obj->type == 1)
-		nor = vecsub(pos, &obj->pos);
+		nor = vector_substract(pos, &obj->pos);
 	else if (obj->type == 2)
-		nor = (t_vec3){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
+		nor = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
 	else if (obj->type == 3)
-		nor = (t_vec3){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
-	vecnorm(&nor);
+		nor = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
+	vector_normalization(&nor);
 	return (nor);
 }
 
-double	get_shadows(t_env *e, t_vec3 *pos)
+double	get_shadows(t_env *e, t_vector *pos)
 {
 	t_obj	*obj;
 	double	sha;
@@ -36,60 +36,60 @@ double	get_shadows(t_env *e, t_vec3 *pos)
 	return (ft_clamp(sha, 0.0, 1.0));
 }
 
-t_vec3	get_diff(t_env *e, t_vec3 *pos, t_vec3 *nor)
+t_vector	get_diff(t_env *e, t_vector *pos, t_vector *nor)
 {
 	t_obj	*obj;
-	t_vec3	lig;
-	t_vec3	lig_tmp;
+	t_vector	lig;
+	t_vector	lig_tmp;
 
 	obj = e->obj;
-	lig = (t_vec3){0.0, 0.0, 0.0};
+	lig = (t_vector){0.0, 0.0, 0.0};
 	while (obj)
 	{
 		if (obj->type == 4)
 		{
 			lig_tmp = lambert(obj, nor, pos);
-			lig = vecadd(&lig, &lig_tmp);
+			lig = vector_add(&lig, &lig_tmp);
 		}
 		obj = obj->next;
 	}
-	lig = vecopx(&lig, e->ln);
-	vecclamp(&lig, 0.0, 1.0);
+	lig = vector_op_multiply(&lig, e->ln);
+	vector_clamp(&lig, 0.0, 1.0);
 	return (lig);
 }
 
-t_vec3	get_spe(t_env *e, t_vec3 *pos, t_vec3 *nor)
+t_vector	get_spe(t_env *e, t_vector *pos, t_vector *nor)
 {
 	t_obj	*obj;
-	t_vec3	spe;
+	t_vector	spe;
 
 	obj = e->obj;
-	spe = (t_vec3){0.0, 0.0, 0.0};
+	spe = (t_vector){0.0, 0.0, 0.0};
 	while (obj)
 	{
 		if (obj->type == 4)
-			spe = vecopplus(&spe, phong(obj, nor, &e->rd, pos));
+			spe = vector_op_add(&spe, phong(obj, nor, &e->rd, pos));
 		obj = obj->next;
 	}
-	vecclamp(&spe, 0.0, 1.0);
+	vector_clamp(&spe, 0.0, 1.0);
 	return (spe);
 }
 
 
-void	get_lighting(t_env *e, t_vec3 *col, t_vec3 *pos)
+void	get_lighting(t_env *e, t_vector *col, t_vector *pos)
 {
 	double	sha;
-	t_vec3	spe;
-	t_vec3	lig;
-	t_vec3	nor;
+	t_vector	spe;
+	t_vector	lig;
+	t_vector	nor;
 
 	nor = setnor(e->objs, pos);
 	sha = get_shadows(e, pos);
 	lig = get_diff(e, pos, &nor);
 	spe = get_spe(e, pos, &nor);
-	lig = vecopx(&lig, sha);
-	spe = vecprod(&spe, &lig);
-	*col = vecadd(col, &spe);
-	vecclamp(col, 0.0, 1.0);
-	*col = vecprod(col, &lig);
+	lig = vector_op_multiply(&lig, sha);
+	spe = vector_multiply(&spe, &lig);
+	*col = vector_add(col, &spe);
+	vector_clamp(col, 0.0, 1.0);
+	*col = vector_multiply(col, &lig);
 }

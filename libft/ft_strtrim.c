@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 17:02:54 by qmuntada          #+#    #+#             */
-/*   Updated: 2014/11/08 19:24:19 by qmuntada         ###   ########.fr       */
+/*   Created: 2017/11/25 17:19:17 by olbondar          #+#    #+#             */
+/*   Updated: 2017/12/02 16:01:12 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 char	*ft_strtrim(char const *s)
 {
-	size_t	len;
-	size_t	fin;
-	size_t	debut;
-	size_t	cpt;
-	char	*news;
+	int		i;
+	int		length;
+	char	*str;
 
-	fin = 0;
-	debut = 0;
-	cpt = -1;
 	if (s == NULL)
 		return (NULL);
-	len = ft_strlen(s);
-	while (*(s + (--len)) == ' ' || *(s + len) == '\n' || *(s + len) == '\t')
-		fin++;
-	len = -1;
-	while (*(s + (++len)) == ' ' || *(s + len) == '\n' || *(s + len) == '\t')
-		debut++;
-	len = ft_strlen(s) - (debut + fin);
-	news = malloc(sizeof(char) * (len + 1));
-	if (news == NULL)
+	length = ft_strlen(s);
+	while (s[length - 1] == ' '
+	|| s[length - 1] == '\t' || s[length - 1] == '\n')
+		length--;
+	i = -1;
+	while (s[++i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		length--;
+	if (length <= 0)
+		length = 0;
+	str = (char*)malloc(length + 1);
+	if (str == NULL)
 		return (NULL);
-	while (++cpt < len)
-		*(news + cpt) = *(s + (cpt + debut));
-	*(news + cpt) = '\0';
-	return (news);
+	s = s + i;
+	i = -1;
+	while (++i < length)
+		str[i] = *s++;
+	str[i] = '\0';
+	return (str);
 }

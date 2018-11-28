@@ -3,55 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 19:28:03 by qmuntada          #+#    #+#             */
-/*   Updated: 2014/11/08 16:51:34 by qmuntada         ###   ########.fr       */
+/*   Created: 2017/11/25 17:00:08 by olbondar          #+#    #+#             */
+/*   Updated: 2017/11/26 13:41:54 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static void		lengths(int n, size_t *len, int *weight)
+static size_t	ft_length(int n)
 {
-	*len = 1;
-	if (n >= 0)
-	{
-		*len = 0;
-		n = -n;
-	}
-	*weight = 1;
-	while (n / *weight < -9)
-	{
-		*weight *= 10;
-		*len += 1;
-	}
+	size_t		i;
+
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
 }
 
 char			*ft_itoa(int n)
 {
-	size_t		len;
-	int			weight;
-	size_t		cur;
-	char		*str;
+	char			*str;
+	size_t			length;
+	unsigned int	tmp;
 
-	lengths(n, &len, &weight);
-	str = (char *)malloc(sizeof(*str) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-	cur = 0;
+	length = ft_length(n);
+	tmp = n;
 	if (n < 0)
 	{
-		str[cur] = '-';
-		cur++;
+		tmp = -n;
+		length++;
 	}
-	if (n > 0)
-		n = -n;
-	while (weight >= 1)
-	{
-		str[cur++] = -(n / weight % 10) + 48;
-		weight /= 10;
-	}
-	str[cur] = '\0';
+	if (!(str = ft_strnew(length)))
+		return (NULL);
+	str[--length] = tmp % 10 + '0';
+	while (tmp /= 10)
+		str[--length] = tmp % 10 + '0';
+	if (n < 0)
+		str[0] = '-';
 	return (str);
 }

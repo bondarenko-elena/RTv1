@@ -23,9 +23,9 @@
 typedef struct			s_obj
 {
 	int					type;
-	t_vec3				pos;
-	t_vec3				rot;
-	t_vec3				color;
+	t_vector			pos;
+	t_vector			rot;
+	t_vector			color;
 	double				size;
 	double				power;
 	struct s_obj		*next;
@@ -37,11 +37,11 @@ typedef struct			s_env
 	void				*window;
 	int					screen_height;
 	int					screen_width;
-	t_vec3				cam_pos;
-	t_vec3				cam_dir;
-	t_vec3				ro;
-	t_vec3				rd;
-	t_vec3				col;
+	t_vector			cam_pos;
+	t_vector			cam_dir;
+	t_vector			ro;
+	t_vector			rd;
+	t_vector			col;
 	t_obj				*obj;
 	t_obj				*objs;
 	char				*screen_name;
@@ -55,7 +55,7 @@ int						key_release(int keycode, t_env *e);
 void					parse_file(t_env *e, t_list *list);
 void					get_camera(t_env *e, char *info, int type);
 void					get_double(t_obj *obj, char *info, int type);
-void					get_vector(t_vec3 *vec, char *content);
+void					get_vector(t_vector *vec, char *content);
 void					init_obj(t_obj *obj);
 t_obj					*new_obj(t_obj *obj);
 void					obj_push_back(t_env *e, t_obj *obj);
@@ -63,12 +63,12 @@ void					pre_init_env(t_env *e);
 void					post_init_env(t_env *e);
 void					put_pixel(t_env *e, int x, int y);
 void					display(t_env *e);
-void					get_lighting(t_env *e, t_vec3 *col, t_vec3 *pos);
-t_obj					*inter_object(t_env *e, t_vec3 *ro, t_vec3 *rd, \
+void					get_lighting(t_env *e, t_vector *col, t_vector *pos);
+t_obj					*inter_object(t_env *e, t_vector *ro, t_vector *rd, \
 							double *dmin);
-double					inter_shadows(t_env *e, t_vec3 *pos, t_vec3 *lpos);
-t_vec3					lambert(t_obj *obj, t_vec3 *nor, t_vec3 *pos);
-double					phong(t_obj *obj, t_vec3 *nor, t_vec3 *rd, t_vec3 *pos);
+double					inter_shadows(t_env *e, t_vector *pos, t_vector *lpos);
+t_vector				lambert(t_obj *obj, t_vector *nor, t_vector *pos);
+double					phong(t_obj *obj, t_vector *nor, t_vector *rd, t_vector *pos);
 int						red_cross(t_env *env);
 int						open_file(t_env *env, char *filename);
 void 					exit_w_error(char *msg);

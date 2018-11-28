@@ -3,25 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 14:06:29 by qmuntada          #+#    #+#             */
-/*   Updated: 2014/11/08 14:08:37 by qmuntada         ###   ########.fr       */
+/*   Created: 2017/11/25 17:04:10 by olbondar          #+#    #+#             */
+/*   Updated: 2017/12/02 14:29:24 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_max(int *array, int len)
-{
-	int		i;
-	int		max;
+#include "libft.h"
 
-	i = 0;
-	max = array[i];
-	while (i < len)
-	{
-		if (array[i] > max)
-			max = array[i];
-		i++;
-	}
-	return (max);
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }

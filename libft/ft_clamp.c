@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clamp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmuntada <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/05 16:55:50 by qmuntada          #+#    #+#             */
-/*   Updated: 2015/02/05 16:55:54 by qmuntada         ###   ########.fr       */
+/*   Created: 2018/11/25 16:18:52 by olbondar          #+#    #+#             */
+/*   Updated: 2018/11/25 16:18:53 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 double		ft_clamp(double x, double min, double max)
 {
