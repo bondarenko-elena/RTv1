@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:14:29 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:14:30 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:44:50 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// veccross
+
 t_vector	vector_cross(t_vector *v1, t_vector *v2)
 {
 	t_vector tmp;

@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:12:07 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:12:09 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:47:28 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// vecsub
+
 t_vector	vector_substract(t_vector *v1, t_vector *v2)
 {
 	t_vector	tmp;

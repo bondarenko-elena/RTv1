@@ -60,20 +60,33 @@ void	get_color(char *content, t_obj *obj)
 void	get_obj_info(t_list *list, t_obj *obj)
 {
 	t_vector	vec;
+	char 		*tmp;
 
 	if (ft_strstr(list->content, "color"))
-		get_color(ft_strconc(list->content, '(', ')'), obj);
+	{
+		tmp = ft_strconc(list->content, '(', ')');
+		get_color(tmp, obj);
+		free(tmp);
+	}
 	else if (ft_strstr(list->content, "size"))
-		get_double(obj, ft_strconc(list->content, '(', ')'), 0);
+	{
+		tmp = ft_strconc(list->content, '(', ')');
+		get_double(obj, tmp, 0);
+		free(tmp);
+	}
 	else if (ft_strstr(list->content, "pos"))
 	{
-		get_vector(&vec, ft_strconc(list->content, '(', ')'));
+		tmp = ft_strconc(list->content, '(', ')');
+		get_vector(&vec, tmp);
 		obj->pos = vec;
+		free(tmp);
 	}
 	else if (ft_strstr(list->content, "rot"))
 	{
-		get_vector(&vec, ft_strconc(list->content, '(', ')'));
+		tmp = ft_strconc(list->content, '(', ')');
+		get_vector(&vec, tmp);
 		obj->rot = vec;
+		free(tmp);
 	}
 	else if (ft_strstr(list->content, "power"))
 		get_double(obj, ft_strconc(list->content, '(', ')'), 1);
@@ -82,6 +95,7 @@ void	get_obj_info(t_list *list, t_obj *obj)
 void	get_content(t_env *env, t_list *list)
 {
 	t_obj	obj;
+	char 	*tmp;
 
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
@@ -90,7 +104,8 @@ void	get_content(t_env *env, t_list *list)
 		if (ft_strstr(list->content, "object"))
 		{
 			init_obj(&obj);
-			obj.type = convert_obj_type(env, ft_strconc(list->content, '(', ')'));
+			tmp = ft_strconc(list->content, '(', ')');
+			obj.type = convert_obj_type(env, tmp);
 			while (list && !ft_strstr(list->content, "{"))
 				list = list->next;
 			while (list && !ft_strstr(list->content, "}"))
@@ -108,6 +123,7 @@ void	get_camera(t_env *env, char *content, int check)
 {
 	char	**content_splitted;
 
+	content_splitted = NULL;
 	if (content)
 	{
 		content_splitted = ft_strsplit(content, ' ');
@@ -124,30 +140,46 @@ void	get_camera(t_env *env, char *content, int check)
 			env->cam_dir.z = ft_atoi(content_splitted[2]);
 		}
 	}
+	free_tab_char(content_splitted, 2);
 }
 
 void	get_scene(t_env *env, t_list *list)
 {
+	char *tmp;
+	char **str_splitted;
+
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
 	while (list && !ft_strstr(list->content, "}"))
 	{
 		if (ft_strstr(list->content, "name"))
 		{
-			if (ft_strconc(list->content, '(', ')'))
-				env->screen_name = ft_strdup(ft_strconc(list->content, '(', ')'));
+			if ((tmp = ft_strconc(list->content, '(', ')')))
+				env->screen_name = ft_strdup(tmp);
+			free(tmp);
 		}
 		else if (ft_strstr(list->content, "cam_pos"))
-			get_camera(env, ft_strconc(list->content, '(', ')'), 0);
+		{
+			tmp = ft_strconc(list->content, '(', ')');
+			get_camera(env, tmp, 0);
+			free(tmp);
+		}
 		else if (ft_strstr(list->content, "cam_dir"))
-			get_camera(env, ft_strconc(list->content, '(', ')'), 1);
+		{
+			tmp = ft_strconc(list->content, '(', ')');
+			get_camera(env, tmp, 1);
+			free(tmp);
+		}
 		else if (ft_strstr(list->content, "render"))
 		{
-			if (ft_strconc(list->content, '(', ')'))
+			if ((tmp = ft_strconc(list->content, '(', ')')))
 			{
-				env->screen_width = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[0]), 10, 5000);
-				env->screen_height = ft_clamp(ft_atoi(ft_strsplit(ft_strconc(list->content, '(', ')'), ' ')[1]), 10, 5000);
+				str_splitted = ft_strsplit(tmp, ' ');
+				env->screen_width = ft_clamp(ft_atoi(str_splitted[0]), 10, 5000);
+				env->screen_height = ft_clamp(ft_atoi(str_splitted[1]), 10, 5000);
+				free_tab_char(str_splitted, 1);
 			}
+			free(tmp);
 		}
 		list = list->next;
 	}
@@ -155,12 +187,15 @@ void	get_scene(t_env *env, t_list *list)
 
 void	parse_file(t_env *env, t_list *list)
 {
-	while (list)
+	t_list *tmp;
+
+	tmp = list;
+	while (tmp)
 	{
-		if (ft_strstr(list->content, "scene"))
-			get_scene(env, list);
-		else if (ft_strstr(list->content, "content"))
-			get_content(env, list);
-		list = list->next;
+		if (ft_strstr(tmp->content, "scene"))
+			get_scene(env, tmp);
+		else if (ft_strstr(tmp->content, "content"))
+			get_content(env, tmp);
+		tmp = tmp->next;
 	}
 }

@@ -14,7 +14,11 @@ int		open_file(t_env *env, char *filename)
 	if (fd < 0)
 		return (0);
 	while (get_next_line(fd, &line) == 1)
+	{
 		ft_lstpushback(&list, line, ft_strlen(line));
+		free(line);
+	}
+	free(line);
 	if (!list)
 		return (0);
 	close(fd);

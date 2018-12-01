@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:13:29 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:13:30 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:45:47 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// vecopplus
+
 t_vector	vector_op_add(t_vector *v, double x)
 {
 	t_vector tmp;

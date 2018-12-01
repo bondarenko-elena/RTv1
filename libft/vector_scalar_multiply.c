@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:12:48 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:12:50 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:46:56 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// vecdot
+
 double	vector_scalar_multiply(t_vector *v1, t_vector *v2)
 {
 	return ((v1->x * v2->x) + (v1->y * v2->y) + (v1->z * v2->z));

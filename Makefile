@@ -40,6 +40,7 @@ RESOURCES	= display.c \
 				pixel.c \
 				reader.c \
 				shadows.c \
+				fresher.c \
 
 INC_PFIX	= $(addprefix -I,$(INC_PATH))
 OBJ_PFIX	= $(addprefix $(OBJ_PATH),$(OBJECTS))
@@ -72,6 +73,6 @@ fclean: clean
 	@echo "$(WAC)Removing RTv1 executable$(NOC)"
 
 re: fclean 
-	$(MAKE) all
+	@$(MAKE) all
 
 .PHONY: all, $(NAME), clean, fclean, re

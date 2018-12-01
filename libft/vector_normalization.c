@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:08:40 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:08:47 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:46:12 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// vecnorm
+
 void	vector_normalization(t_vector *v)
 {
 	double	n;

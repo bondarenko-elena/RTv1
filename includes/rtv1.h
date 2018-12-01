@@ -73,5 +73,5 @@ int						red_cross(t_env *env);
 int						open_file(t_env *env, char *filename);
 void 					exit_w_error(char *msg);
 void					get_color(char *content, t_obj *obj);
-
+void					free_tab_char(char **line, int size);
 #endif

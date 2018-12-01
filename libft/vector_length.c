@@ -6,12 +6,12 @@
 /*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:13:55 by olbondar          #+#    #+#             */
-/*   Updated: 2018/11/25 16:13:57 by olbondar         ###   ########.fr       */
+/*   Updated: 2018/12/01 15:45:34 by olbondar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// veclength
+
 double	vector_length(t_vector *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
