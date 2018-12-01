@@ -16,7 +16,6 @@ SRC :=  display.c \
 		hooks.c \
 		inter.c \
 		light.c \
-		light2.c \
 		main.c \
 		object.c \
 		parser.c \
