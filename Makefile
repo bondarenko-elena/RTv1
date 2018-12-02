@@ -10,69 +10,49 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= RTv1
+NAME := RTv1
 
-NOC			= \033[0m
-OKC			= \033[32m
-ERC			= \033[31m
-WAC			= \033[33m
-TSC			= \033[94;1m
+SRC := display.c \
+		init_environment.c \
+		hooks.c \
+		inter.c \
+		light.c \
+		main.c \
+		object.c \
+		parser.c \
+		pixel.c \
+		reader.c \
+		shadows.c \
+		fresher.c \
 
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra
-FRAMWRKS 	= -lmlx -framework OpenGL -framework AppKit
+CC := gcc
+SRC := $(addprefix srcs/,$(SRC))
+OBJ := $(SRC:.c=.o)
+HEADLIB := libft/
+HEADMLX := /usr/local/include
+CFLAGS := -Wall -Wextra -Werror
+LIBMLX := /usr/local/lib
+FRAMEWS := -lmlx -framework OpenGL -framework AppKit
 
-INC_PATH	= ./includes/
-LFT_PATH	= ./libft/
-MLX_PATH	= ./minilibx/
-OBJ_PATH	= ./objs/
-SRC_PATH	= ./srcs/
+all: create_lib $(NAME)
 
-OBJECTS		= $(RESOURCES:.c=.o)
-RESOURCES	= display.c \
-				init_environment.c \
-				hooks.c \
-				inter.c \
-				light.c \
-				main.c \
-				object.c \
-				parser.c \
-				pixel.c \
-				reader.c \
-				shadows.c \
-				fresher.c \
+create_lib:
+	@make -C libft
 
-INC_PFIX	= $(addprefix -I,$(INC_PATH))
-OBJ_PFIX	= $(addprefix $(OBJ_PATH),$(OBJECTS))
-SRC_PFIX	= $(addprefix $(SRC_PATH),$(RESOURCES))
+$(NAME): $(OBJ)
+	@gcc -o $(NAME) $(OBJ) libft/libft.a -L $(LIBMLX) $(FRAMEWS)
+	@echo "\033[32mRTv1 is ready.\033[0m"
 
-all: $(NAME)
-
-$(NAME): $(OBJ_PFIX)
-	@echo
-	@make -C $(LFT_PATH)
-	@make -C $(MLX_PATH)
-	@$(CC) -o $(NAME) $(OBJ_PFIX) -lm -L $(LFT_PATH) -L $(MLX_PATH) -lft $(FRAMWRKS)
-	@echo "$(OKC)RTv1 is ready$(NOC)"
-
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(INC_PFIX) -o $@ -c $<
+%.o: %.c
+	@$(CC) -c $(CFLAGS) -o $@ $< -I $(HEADLIB) -I $(HEADMLX) -I includes
 
 clean:
-	@make -C $(LFT_PATH) clean
-	@make -C $(MLX_PATH) clean
-	@rm -rf $(OBJ_PATH)
-	@echo "$(WAC)Removing RTv1 OBJECTS path$(NOC)"
+	@rm -rf $(OBJ)
 
 fclean: clean
-	@make -C $(LFT_PATH) fclean
-	@make -C $(MLX_PATH) clean
-	@rm -f $(NAME)
-	@echo "$(WAC)Removing RTv1 executable$(NOC)"
+	@rm -rf $(NAME)
+	@make fclean -C libft
 
-re: fclean 
-	@$(MAKE) all
+re: @fclean all
 
-.PHONY: all, $(NAME), clean, fclean, re
+.PHONY: create_lib all clean fclean re

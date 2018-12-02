@@ -23,7 +23,7 @@ void	init_obj(t_obj *obj)
 	obj->power = 50.0;
 	obj->pos = (t_vector){0.0, 1.0, 0.0};
 	obj->rot = (t_vector){0.0, 1.0, 1.0};
-	obj->color = (t_vector){0.9, 0.9, 0.9};
+	obj->color = (t_vector){0.5, 0.5, 0.5};
 }
 
 void	obj_push_back(t_env *e, t_obj *obj)
