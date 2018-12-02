@@ -31,8 +31,8 @@ void	get_vector(t_vector *vec, char *content)
 		vec->x = ft_atoi(content_splitted[0]);
 		vec->y = ft_atoi(content_splitted[1]);
 		vec->z = ft_atoi(content_splitted[2]);
+		free_tab_char(content_splitted, 2);
 	}
-	free_tab_char(content_splitted, 2);
 }
 
 void	get_double(t_obj *obj, char *content, int check)
@@ -57,8 +57,8 @@ void	get_color(char *content, t_obj *obj)
 		obj->color.x = ft_clamp(ft_atoi(content_splitted[0]) / 256.0, 0.0, 1.0);
 		obj->color.y = ft_clamp(ft_atoi(content_splitted[1]) / 256.0, 0.0, 1.0);
 		obj->color.z = ft_clamp(ft_atoi(content_splitted[2]) / 256.0, 0.0, 1.0);
+		free_tab_char(content_splitted, 2);
 	}
-	// free_tab_char(content_splitted, 2);
 }
 
 void	get_obj_info(t_list *list, t_obj *obj)
