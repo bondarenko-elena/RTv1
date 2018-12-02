@@ -23,5 +23,10 @@ int		open_file(t_env *env, char *filename)
 		return (0);
 	close(fd);
 	parse_file(env, list);
+	// while(list)
+	// {
+	// 	ft_lstdel(&list, uf_del_callback);
+	// 	list = list->next;
+	// }
 	return (1);
 }

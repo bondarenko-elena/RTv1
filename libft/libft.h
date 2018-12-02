@@ -134,5 +134,6 @@ t_vector				vector_op_multiply(t_vector *a, double x);
 t_vector				vector_reflect(t_vector *i, t_vector *n);
 double					vector_scalar_multiply(t_vector *a, t_vector *b);
 t_vector				vector_substract(t_vector *v1, t_vector *v2);
+void					uf_del_callback(void *d, size_t s);
 
 #endif

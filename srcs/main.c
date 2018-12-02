@@ -15,6 +15,7 @@ int		main(int argc, char **argv)
 		t_env env;
 
 		pre_init_env(&env);
+		puts(argv[1]);
 		if (open_file(&env, argv[1]) == 0)
 			exit_w_error("Incorrect parameter.");
 		post_init_env(&env);
