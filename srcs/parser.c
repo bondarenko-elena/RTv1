@@ -93,7 +93,11 @@ void	get_obj_info(t_list *list, t_obj *obj)
 		free(tmp);
 	}
 	else if (ft_strstr(list->content, "power"))
-		get_double(obj, ft_strconc(list->content, '(', ')'), 1);
+	{
+		tmp = ft_strconc(list->content, '(', ')');
+		get_double(obj, tmp, 1);
+		free(tmp);
+	}
 }
 
 void	get_content(t_env *env, t_list *list)
@@ -110,6 +114,7 @@ void	get_content(t_env *env, t_list *list)
 			init_obj(&obj);
 			tmp = ft_strconc(list->content, '(', ')');
 			obj.type = convert_obj_type(env, tmp);
+			free(tmp);
 			while (list && !ft_strstr(list->content, "{"))
 				list = list->next;
 			while (list && !ft_strstr(list->content, "}"))
