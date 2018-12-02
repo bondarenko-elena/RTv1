@@ -4,8 +4,9 @@ t_obj	*new_obj(t_obj *obj)
 {
 	t_obj	*ret;
 
-	if (!(ret = malloc(sizeof(t_obj))))
-		exit_w_error("Unable to allocate memory for new object.");
+	ret = malloc(sizeof(t_obj));
+	if (ret == NULL)
+		exit_w_error("new_obj: malloc error");
 	ret->type = obj->type;
 	ret->size = obj->size / 100.0;
 	ret->power = obj->power / 100.0;

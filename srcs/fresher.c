@@ -10,8 +10,12 @@ void	free_tab_char(char **line, int size)
 	free(line);
 }
 
-void	uf_del_callback(void *d, size_t s)
+void	free_tab_list(t_list *list)
 {
-	free(d);
-	(void)s;
+	while(list)
+	{
+		free(list->content);
+		free(list);
+		list = list->next;
+	}
 }

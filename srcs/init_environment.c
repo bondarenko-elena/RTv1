@@ -2,9 +2,6 @@
 
 void	pre_init_env(t_env *env)
 {
-	// env = (t_env*)malloc(sizeof(t_env));
-	// if (env == NULL)
-	// 	exit_w_error("pre_init_env: malloc error");
 	env->mlx_init = mlx_init();
 	env->screen_name = "RTv1@4olbondar";
 	env->screen_height = HEIGHT;
