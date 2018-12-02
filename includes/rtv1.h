@@ -75,5 +75,6 @@ void 					exit_w_error(char *msg);
 void					get_color(char *content, t_obj *obj);
 void					free_tab_char(char **line, int size);
 void					get_render(t_env *env, char *content);
+void 					get_name(t_env *env, char *content);
 
 #endif

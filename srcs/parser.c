@@ -164,6 +164,12 @@ void	get_render(t_env *env, char *content)
 	free(content);
 }
 
+void get_name(t_env *env, char *content)
+{
+	env->screen_name = ft_strdup(content);
+	free(content);
+}
+
 void	get_scene(t_env *env, t_list *list)
 {
 	char *tmp;
@@ -175,18 +181,17 @@ void	get_scene(t_env *env, t_list *list)
 		if (ft_strstr(list->content, "name"))
 		{
 			if ((tmp = ft_strconc(list->content, '(', ')')))
-				env->screen_name = ft_strdup(tmp);
-			free(tmp);
+				get_name(env, tmp);
 		}
 		else if (ft_strstr(list->content, "cam_pos"))
 		{
-			tmp = ft_strconc(list->content, '(', ')');
-			get_camera(env, tmp, 0);
+			if ((tmp = ft_strconc(list->content, '(', ')')))
+				get_camera(env, tmp, 0);
 		}
 		else if (ft_strstr(list->content, "cam_dir"))
 		{
-			tmp = ft_strconc(list->content, '(', ')');
-			get_camera(env, tmp, 1);
+			if ((tmp = ft_strconc(list->content, '(', ')')))
+				get_camera(env, tmp, 1);
 		}
 		else if (ft_strstr(list->content, "render"))
 		{
