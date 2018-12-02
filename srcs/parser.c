@@ -150,12 +150,23 @@ void	get_camera(t_env *env, char *content, int check)
 		}
 	}
 	free_tab_char(content_splitted, 2);
+	free(content);
+}
+
+void	get_render(t_env *env, char *content)
+{
+	char **content_splitted;
+
+	content_splitted = ft_strsplit(content, ' ');
+	env->screen_width = ft_clamp(ft_atoi(content_splitted[0]), 10, 5000);
+	env->screen_height = ft_clamp(ft_atoi(content_splitted[1]), 10, 5000);
+	free_tab_char(content_splitted, 1);
+	free(content);
 }
 
 void	get_scene(t_env *env, t_list *list)
 {
 	char *tmp;
-	char **str_splitted;
 
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
@@ -171,24 +182,16 @@ void	get_scene(t_env *env, t_list *list)
 		{
 			tmp = ft_strconc(list->content, '(', ')');
 			get_camera(env, tmp, 0);
-			free(tmp);
 		}
 		else if (ft_strstr(list->content, "cam_dir"))
 		{
 			tmp = ft_strconc(list->content, '(', ')');
 			get_camera(env, tmp, 1);
-			free(tmp);
 		}
 		else if (ft_strstr(list->content, "render"))
 		{
 			if ((tmp = ft_strconc(list->content, '(', ')')))
-			{
-				str_splitted = ft_strsplit(tmp, ' ');
-				env->screen_width = ft_clamp(ft_atoi(str_splitted[0]), 10, 5000);
-				env->screen_height = ft_clamp(ft_atoi(str_splitted[1]), 10, 5000);
-				free_tab_char(str_splitted, 1);
-			}
-			free(tmp);
+				get_render(env, tmp);
 		}
 		list = list->next;
 	}
