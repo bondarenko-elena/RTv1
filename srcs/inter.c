@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inter.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:46:29 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:50:43 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-double	isphere(t_obj *obj, t_vector *ro, t_vector *rd)
+double			isphere(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = vector_scalar_multiply(rd, rd);
@@ -18,24 +30,25 @@ double	isphere(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-double	iplane(t_obj *obj, t_vector *ro, t_vector *rd)
+double			iplane(t_obj *obj, t_vector *ro, t_vector *rd)
 {
-	double	t;
+	double		t;
 
-	t = -((vector_scalar_multiply(&obj->rot, ro) - vector_scalar_multiply(&obj->rot, &obj->pos))\
-		/ vector_scalar_multiply(&obj->rot, rd));
+	t = -((vector_scalar_multiply(&obj->rot, ro) -
+				vector_scalar_multiply(&obj->rot, &obj->pos))
+			/ vector_scalar_multiply(&obj->rot, rd));
 	if (t < 0.0001)
 		return (-1.0);
 	return (t);
 }
 
-double	icylinder(t_obj *obj, t_vector *ro, t_vector *rd)
+double			icylinder(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = rd->x * rd->x + rd->z * rd->z;
@@ -47,13 +60,13 @@ double	icylinder(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-double	icone(t_obj *obj, t_vector *ro, t_vector *rd)
+double			icone(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = rd->x * rd->x - rd->y * rd->y + rd->z * rd->z;
@@ -65,11 +78,12 @@ double	icone(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-t_obj	*inter_object(t_env *e, t_vector *ro, t_vector *rd, double *dmin)
+t_obj			*inter_object(t_env *e,
+		t_vector *ro, t_vector *rd, double *dmin)
 {
-	t_obj	*lobj;
-	t_obj	*obj;
-	double	tmp;
+	t_obj		*lobj;
+	t_obj		*obj;
+	double		tmp;
 
 	obj = NULL;
 	lobj = e->obj;

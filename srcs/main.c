@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:35:51 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:37:03 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-void exit_w_error(char *msg)
+void	exit_w_error(char *msg)
 {
 	ft_putendl(msg);
 	exit(EXIT_FAILURE);
@@ -8,12 +20,12 @@ void exit_w_error(char *msg)
 
 int		main(int argc, char **argv)
 {
+	t_env env;
+
 	if (argc < 2)
 		exit_w_error("No parameter found. Usage: ./rtv1 scenes/scene.");
 	if (argc == 2)
 	{
-		t_env env;
-
 		pre_init_env(&env);
 		if (open_file(&env, argv[1]) == 0)
 			exit_w_error("Incorrect parameter.");

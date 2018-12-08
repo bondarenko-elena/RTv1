@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:40:38 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:40:40 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
 t_obj	*new_obj(t_obj *obj)
 {
 	t_obj	*ret;
 
-	ret = malloc(sizeof(t_obj));
+	ret = (t_obj*)malloc(sizeof(t_obj));
 	if (ret == NULL)
 		exit_w_error("new_obj: malloc error");
 	ret->type = obj->type;

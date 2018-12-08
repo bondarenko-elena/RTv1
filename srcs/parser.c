@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:34:49 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 15:06:07 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-int		convert_obj_type(t_env *e, char *stype)
+int				convert_obj_type(t_env *e, char *stype)
 {
 	if (ft_strstr(stype, "plane"))
 		return (0);
 	else if (ft_strstr(stype, "sphere"))
 		return (1);
-	else if (ft_strstr(stype, "cylinder"))	
+	else if (ft_strstr(stype, "cylinder"))
 		return (2);
 	else if (ft_strstr(stype, "cone"))
 		return (3);
@@ -20,9 +32,9 @@ int		convert_obj_type(t_env *e, char *stype)
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-void	get_vector(t_vector *vec, char *content)
+void			get_vector(t_vector *vec, char *content)
 {
-	char	**content_splitted;
+	char		**content_splitted;
 
 	content_splitted = NULL;
 	if (content)
@@ -36,7 +48,7 @@ void	get_vector(t_vector *vec, char *content)
 	// free(content);
 }
 
-void	get_double(t_obj *obj, char *content, int check)
+void			get_double(t_obj *obj, char *content, int check)
 {
 	if (content)
 	{
@@ -48,9 +60,9 @@ void	get_double(t_obj *obj, char *content, int check)
 	// free(content);
 }
 
-void	get_color(char *content, t_obj *obj)
+void			get_color(char *content, t_obj *obj)
 {
-	char **content_splitted;
+	char		**content_splitted;
 
 	content_splitted = NULL;
 	if (content)
@@ -64,10 +76,10 @@ void	get_color(char *content, t_obj *obj)
 	}
 }
 
-void	get_obj_info(t_list *list, t_obj *obj)
+void			get_obj_info(t_list *list, t_obj *obj)
 {
 	t_vector	vec;
-	char 		*tmp;
+	char		*tmp;
 
 	if (ft_strstr(list->content, "color"))
 	{
@@ -103,10 +115,10 @@ void	get_obj_info(t_list *list, t_obj *obj)
 	}
 }
 
-void	get_content(t_env *env, t_list *list)
+void			get_content(t_env *env, t_list *list)
 {
-	t_obj	obj;
-	char 	*tmp;
+	t_obj		obj;
+	char		*tmp;
 
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
@@ -131,9 +143,9 @@ void	get_content(t_env *env, t_list *list)
 	}
 }
 
-void	get_camera(t_env *env, char *content, int check)
+void			get_camera(t_env *env, char *content, int check)
 {
-	char	**content_splitted;
+	char		**content_splitted;
 
 	content_splitted = NULL;
 	if (content)
@@ -156,9 +168,9 @@ void	get_camera(t_env *env, char *content, int check)
 	free(content);
 }
 
-void	get_render(t_env *env, char *content)
+void		get_render(t_env *env, char *content)
 {
-	char **content_splitted;
+	char	**content_splitted;
 
 	content_splitted = ft_strsplit(content, ' ');
 	env->screen_width = ft_clamp(ft_atoi(content_splitted[0]), 10, 5000);
@@ -167,9 +179,9 @@ void	get_render(t_env *env, char *content)
 	free(content);
 }
 
-void get_name(t_env *env, char *content)
+void		get_name(t_env *env, char *content)
 {
-	char *tmp;
+	char	*tmp;
 
 	if ((tmp = ft_strconc(content, '(', ')')))
 	{
@@ -178,9 +190,9 @@ void get_name(t_env *env, char *content)
 	}
 }
 
-void	get_scene(t_env *env, t_list *list)
+void		get_scene(t_env *env, t_list *list)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
@@ -207,7 +219,7 @@ void	get_scene(t_env *env, t_list *list)
 	}
 }
 
-void	parse_file(t_env *env, t_list *list)
+void		parse_file(t_env *env, t_list *list)
 {
 	t_list *tmp;
 

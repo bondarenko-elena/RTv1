@@ -53,6 +53,6 @@ fclean: clean
 	@rm -rf $(NAME)
 	@make fclean -C libft
 
-re: @fclean all
+re: fclean all
 
 .PHONY: create_lib all clean fclean re

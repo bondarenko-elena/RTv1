@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_environment.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:39:12 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:39:24 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
 void	pre_init_env(t_env *env)
@@ -15,6 +27,7 @@ void	pre_init_env(t_env *env)
 
 void	post_init_env(t_env *env)
 {
-	env->window = mlx_new_window(env->mlx_init, env->screen_width, env->screen_height, env->screen_name);
+	env->window = mlx_new_window(env->mlx_init,
+			env->screen_width, env->screen_height, env->screen_name);
 	env->ln = 1.0 / env->ln;
 }

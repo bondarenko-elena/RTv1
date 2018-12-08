@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadows.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:41:00 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:46:00 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-int		ssphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				ssphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = vector_scalar_multiply(rd, rd);
@@ -21,13 +33,13 @@ int		ssphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-int		scylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				scylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = rd->x * rd->x + rd->z * rd->z;
@@ -42,13 +54,13 @@ int		scylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-int		scone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				scone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	h;
+	double		a;
+	double		b;
+	double		c;
+	double		h;
 
 	oc = vector_substract(ro, &obj->pos);
 	a = rd->x * rd->x - rd->y * rd->y + rd->z * rd->z;
@@ -63,13 +75,13 @@ int		scone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-double	inter_shadows(t_env *e, t_vector *pos, t_vector *lpos)
+double			inter_shadows(t_env *e, t_vector *pos, t_vector *lpos)
 {
-	t_obj	*lobj;
-	int		tmp;
-	int		sha;
+	t_obj		*lobj;
+	int			tmp;
+	int			sha;
 	t_vector	light;
-	double	l;
+	double		l;
 
 	lobj = e->obj;
 	tmp = 0;

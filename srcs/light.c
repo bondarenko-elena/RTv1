@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   light.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:53:24 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:55:48 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-t_vector	lambert(t_obj *obj, t_vector *nor, t_vector *pos)
+t_vector		lambert(t_obj *obj, t_vector *nor, t_vector *pos)
 {
 	t_vector	lambert;
 	t_vector	light;
-	double	value;
-	double	dist;
+	double		value;
+	double		dist;
 
 	dist = vector_distance(pos, &obj->pos);
 	dist = ft_clamp(sqrt(GAMMA / (dist * (1.0 - obj->power))), 0.0, 1.0);
@@ -20,9 +32,9 @@ t_vector	lambert(t_obj *obj, t_vector *nor, t_vector *pos)
 	return (lambert);
 }
 
-double	phong(t_obj *obj, t_vector *nor, t_vector *rd, t_vector *pos)
+double			phong(t_obj *obj, t_vector *nor, t_vector *rd, t_vector *pos)
 {
-	double	phong;
+	double		phong;
 	t_vector	ref;
 	t_vector	light;
 
@@ -36,7 +48,7 @@ double	phong(t_obj *obj, t_vector *nor, t_vector *rd, t_vector *pos)
 	return (phong);
 }
 
-t_vector	setnor(t_obj *obj, t_vector *pos)
+t_vector		setnor(t_obj *obj, t_vector *pos)
 {
 	t_vector	nor;
 
@@ -51,11 +63,11 @@ t_vector	setnor(t_obj *obj, t_vector *pos)
 	return (nor);
 }
 
-double	get_shadows(t_env *e, t_vector *pos)
+double			get_shadows(t_env *e, t_vector *pos)
 {
-	t_obj	*obj;
-	double	sha;
-	double	tmp;
+	t_obj		*obj;
+	double		sha;
+	double		tmp;
 
 	obj = e->obj;
 	sha = 1.0;
@@ -72,9 +84,9 @@ double	get_shadows(t_env *e, t_vector *pos)
 	return (ft_clamp(sha, 0.0, 1.0));
 }
 
-t_vector	get_diff(t_env *e, t_vector *pos, t_vector *nor)
+t_vector		get_diff(t_env *e, t_vector *pos, t_vector *nor)
 {
-	t_obj	*obj;
+	t_obj		*obj;
 	t_vector	lig;
 	t_vector	lig_tmp;
 
@@ -94,9 +106,9 @@ t_vector	get_diff(t_env *e, t_vector *pos, t_vector *nor)
 	return (lig);
 }
 
-t_vector	get_spe(t_env *e, t_vector *pos, t_vector *nor)
+t_vector		get_spe(t_env *e, t_vector *pos, t_vector *nor)
 {
-	t_obj	*obj;
+	t_obj		*obj;
 	t_vector	spe;
 
 	obj = e->obj;
@@ -111,10 +123,9 @@ t_vector	get_spe(t_env *e, t_vector *pos, t_vector *nor)
 	return (spe);
 }
 
-
-void	get_lighting(t_env *e, t_vector *col, t_vector *pos)
+void			get_lighting(t_env *e, t_vector *col, t_vector *pos)
 {
-	double	sha;
+	double		sha;
 	t_vector	spe;
 	t_vector	lig;
 	t_vector	nor;

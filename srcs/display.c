@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olbondar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/08 14:51:16 by olbondar          #+#    #+#             */
+/*   Updated: 2018/12/08 14:52:46 by olbondar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rtv1.h"
 
-void	set_cam(t_env *e, double x, double y)
+void			set_cam(t_env *e, double x, double y)
 {
-	double	u;
-	double	v;
+	double		u;
+	double		v;
 	t_vector	ww;
 	t_vector	uu;
 	t_vector	vv;
@@ -21,7 +33,8 @@ void	set_cam(t_env *e, double x, double y)
 	e->objs = NULL;
 }
 
-t_vector	object_color(t_env *e, t_vector *ro, t_vector *rd, t_vector *col)
+t_vector		object_color(t_env *e,
+		t_vector *ro, t_vector *rd, t_vector *col)
 {
 	t_vector	pos;
 
@@ -40,7 +53,7 @@ t_vector	object_color(t_env *e, t_vector *ro, t_vector *rd, t_vector *col)
 	return (*col);
 }
 
-t_vector	ray_tracing(t_env *e, double x, double y)
+t_vector		ray_tracing(t_env *e, double x, double y)
 {
 	t_vector	col;
 
@@ -50,7 +63,7 @@ t_vector	ray_tracing(t_env *e, double x, double y)
 	return (col);
 }
 
-void	display(t_env *e)
+void			display(t_env *e)
 {
 	int		x;
 	int		y;
@@ -62,7 +75,8 @@ void	display(t_env *e)
 		while (++x < e->screen_width)
 		{
 			e->col = ray_tracing(e, x, y);
-			e->col = (t_vector){pow(e->col.x, GAMMA), pow(e->col.y, GAMMA), e->col.z = pow(e->col.z, GAMMA)};
+			e->col = (t_vector){pow(e->col.x, GAMMA),
+				pow(e->col.y, GAMMA), e->col.z = pow(e->col.z, GAMMA)};
 			vector_clamp(&e->col, 0.0, 1.0);
 			put_pixel(e, x, y);
 		}
