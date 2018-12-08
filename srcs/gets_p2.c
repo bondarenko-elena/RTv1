@@ -40,9 +40,9 @@ void			get_content(t_env *env, t_list *list)
 	}
 }
 
-void		get_scene(t_env *env, t_list *list)
+void			get_scene(t_env *env, t_list *list)
 {
-	char	*tmp;
+	char		*tmp;
 
 	while (list && !ft_strstr(list->content, "{"))
 		list = list->next;
@@ -69,9 +69,9 @@ void		get_scene(t_env *env, t_list *list)
 	}
 }
 
-void		get_name(t_env *env, char *content)
+void			get_name(t_env *env, char *content)
 {
-	char	*tmp;
+	char		*tmp;
 
 	if ((tmp = ft_strconc(content, '(', ')')))
 	{

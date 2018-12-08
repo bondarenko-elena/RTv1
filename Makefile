@@ -6,26 +6,27 @@
 #    By: olbondar <olbondar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 14:28:57 by olbondar          #+#    #+#              #
-#    Updated: 2018/11/11 12:03:55 by olbondar         ###   ########.fr        #
+#    Updated: 2018/12/08 17:13:47 by olbondar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := RTv1
 
 SRC := display.c \
-		init_env.c \
+		fresher.c \
+		gets.c \
+		gets_p2.c \
 		hooks.c \
+		init_env.c \
 		inter.c \
 		light.c \
+		light_p2.c \
 		main.c \
 		object.c \
 		parser.c \
 		pixel.c \
 		reader.c \
 		shadows.c \
-		fresher.c \
-		gets.c \
-		gets_p2.c \
 
 CC := gcc
 SRC := $(addprefix srcs/,$(SRC))

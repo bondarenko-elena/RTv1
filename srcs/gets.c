@@ -81,9 +81,9 @@ void			get_camera(t_env *env, char *content, int check)
 	free(content);
 }
 
-void		get_render(t_env *env, char *content)
+void			get_render(t_env *env, char *content)
 {
-	char	**content_splitted;
+	char		**content_splitted;
 
 	content_splitted = ft_strsplit(content, ' ');
 	env->screen_width = ft_clamp(ft_atoi(content_splitted[0]), 10, 5000);

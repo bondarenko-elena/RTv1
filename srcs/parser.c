@@ -46,7 +46,7 @@ void			get_obj_content(t_list *list, t_obj *obj)
 		get_double(obj, (tmp = ft_strconc(list->content, '(', ')')), 1);
 }
 
-void		parse_file(t_env *env, t_list *list)
+void			parse_file(t_env *env, t_list *list)
 {
 	t_list *tmp;
 

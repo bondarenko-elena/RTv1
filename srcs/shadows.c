@@ -12,7 +12,8 @@
 
 #include "../includes/rtv1.h"
 
-int				shadow_sphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				shadow_sphere(t_obj *obj, t_vector *ro,
+	t_vector *rd, double tmin)
 {
 	t_vector	oc;
 	double		a;
@@ -33,7 +34,8 @@ int				shadow_sphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-int				shadow_cylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				shadow_cylinder(t_obj *obj, t_vector *ro,
+	t_vector *rd, double tmin)
 {
 	t_vector	oc;
 	double		a;
@@ -75,30 +77,30 @@ int				shadow_cone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-double			inter_shadows(t_env *e, t_vector *pos, t_vector *lpos)
+double			inter_shadows(t_env *env, t_vector *pos, t_vector *lam_pos)
 {
-	t_obj		*lobj;
+	t_obj		*lam_obj;
 	int			tmp;
 	int			sha;
 	t_vector	light;
 	double		l;
 
-	lobj = e->obj;
+	lam_obj = env->obj;
 	tmp = 0;
 	sha = 0;
-	light = vector_substract(lpos, pos);
+	light = vector_substract(lam_pos, pos);
 	l = vector_length(&light);
 	light = vector_op_divide(&light, l);
-	while (lobj)
+	while (lam_obj)
 	{
-		if (lobj->type == 1)
-			tmp = shadow_sphere(lobj, pos, &light, l);
-		else if (lobj->type == 2)
-			tmp = shadow_cylinder(lobj, pos, &light, l);
-		else if (lobj->type == 3)
-			tmp = shadow_cone(lobj, pos, &light, l);
+		if (lam_obj->type == 1)
+			tmp = shadow_sphere(lam_obj, pos, &light, l);
+		else if (lam_obj->type == 2)
+			tmp = shadow_cylinder(lam_obj, pos, &light, l);
+		else if (lam_obj->type == 3)
+			tmp = shadow_cone(lam_obj, pos, &light, l);
 		sha = (tmp == 1 ? 1 : sha);
-		lobj = lobj->next;
+		lam_obj = lam_obj->next;
 	}
 	return (sha);
 }
