@@ -10,13 +10,13 @@ content
 {
 	object(light)
 	{
-		color(256 0 256)
+		color(0 256 256)
 		pos(20 10 1)
 		power(50);
 	}
 	object(light)
 	{
-		color(0 256 0)
+		color(256 0 0)
 		pos(2 1 -5)
 		power(70);
 	}

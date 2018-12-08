@@ -3,7 +3,7 @@ scene
 	name(SCENE1)
 	cam_pos(0 1 10)
 	cam_dir(0 1 0)
-	render(1600 900)
+	render(1680 900)
 }
 
 content

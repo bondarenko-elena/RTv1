@@ -3,7 +3,7 @@ scene
 	name(SCENE1)
 	cam_pos(0 0 0)
 	cam_dir(5 0 10)
-	render(1600 900)
+	render(1680 900)
 }
 
 content
@@ -11,7 +11,7 @@ content
 	object(light)
 	{
 		pos(25 1 0)
-		power(100);
+		power(80);
 	}
 	object(sphere)
 	{
