@@ -12,7 +12,29 @@
 
 #include "../includes/rtv1.h"
 
-void			set_cam(t_env *e, double x, double y)
+t_vector		get_obj_color(t_env *env,
+		t_vector *ro, t_vector *rd, t_vector *color)
+{
+	t_vector	pos;
+
+	env->tmin = 10000.0;
+	env->objs = inter_object(env, ro, rd, &env->tmin);
+	if (env->tmin > 0.0001 && env->objs)
+	{
+		*color = (t_vector){env->objs->color.x,
+			env->objs->color.y, env->objs->color.z};
+		if (env->tmin < 10000.0)
+		{
+			pos = (t_vector){env->ro.x + env->tmin
+				* env->rd.x, env->ro.y + env->tmin *
+				env->rd.y, env->ro.z + env->tmin * env->rd.z};
+			get_lighting(env, color, &pos);
+		}
+	}
+	return (*color);
+}
+
+void			set_cam(t_env *env, double x, double y)
 {
 	double		u;
 	double		v;
@@ -20,65 +42,46 @@ void			set_cam(t_env *e, double x, double y)
 	t_vector	uu;
 	t_vector	vv;
 
-	u = (e->screen_width - x * 2.0) / e->screen_height;
-	v = (e->screen_height - y * 2.0) / e->screen_height;
-	ww = vector_substract(&e->cam_dir, &e->cam_pos);
+	u = (env->screen_width - x * 2.0) / env->screen_height;
+	v = (env->screen_height - y * 2.0) / env->screen_height;
+	ww = vector_substract(&env->cam_dir, &env->cam_pos);
 	vector_normalization(&ww);
 	uu = vector_cross(&ww, &(t_vector){0.0, 1.0, 0.0});
 	vector_normalization(&uu);
 	vv = vector_cross(&uu, &ww);
-	e->rd = (t_vector){u * uu.x + v * vv.x + FOV * ww.x, u * uu.y + v * \
-		vv.y + FOV * ww.y, u * uu.z + v * vv.z + FOV * ww.z};
-	e->ro = e->cam_pos;
-	e->objs = NULL;
+	env->rd = (t_vector){u * uu.x + v * vv.x + FOV * ww.x, u * uu.y + v
+		* vv.y + FOV * ww.y, u * uu.z + v * vv.z + FOV * ww.z};
+	env->ro = env->cam_pos;
+	env->objs = NULL;
 }
 
-t_vector		object_color(t_env *e,
-		t_vector *ro, t_vector *rd, t_vector *col)
+t_vector		ray_tracing(t_env *env, double x, double y)
 {
-	t_vector	pos;
+	t_vector	color;
 
-	e->tmin = 10000.0;
-	e->objs = inter_object(e, ro, rd, &e->tmin);
-	if (e->tmin > 0.0001 && e->objs)
-	{
-		*col = (t_vector){e->objs->color.x, e->objs->color.y, e->objs->color.z};
-		if (e->tmin < 10000.0)
-		{
-			pos = (t_vector){e->ro.x + e->tmin * e->rd.x, e->ro.y + e->tmin * \
-				e->rd.y, e->ro.z + e->tmin * e->rd.z};
-			get_lighting(e, col, &pos);
-		}
-	}
-	return (*col);
+	set_cam(env, x, y);
+	color = (t_vector){0.0, 0.0, 0.0};
+	color = get_obj_color(env, &env->ro, &env->rd, &color);
+	return (color);
 }
 
-t_vector		ray_tracing(t_env *e, double x, double y)
-{
-	t_vector	col;
-
-	set_cam(e, x, y);
-	col = (t_vector){0.0, 0.0, 0.0};
-	col = object_color(e, &e->ro, &e->rd, &col);
-	return (col);
-}
-
-void			display(t_env *e)
+void			display(t_env *env)
 {
 	int		x;
 	int		y;
 
 	y = -1;
-	while (++y < e->screen_height)
+	while (++y < env->screen_height)
 	{
 		x = -1;
-		while (++x < e->screen_width)
+		while (++x < env->screen_width)
 		{
-			e->color = ray_tracing(e, x, y);
-			e->color = (t_vector){pow(e->color.x, GAMMA),
-				pow(e->color.y, GAMMA), e->color.z = pow(e->color.z, GAMMA)};
-			vector_clamp(&e->color, 0.0, 1.0);
-			put_pixel(e, x, y);
+			env->color = ray_tracing(env, x, y);
+			env->color = (t_vector){pow(env->color.x, GAMMA),
+				pow(env->color.y, GAMMA),
+				env->color.z = pow(env->color.z, GAMMA)};
+			vector_clamp(&env->color, 0.0, 1.0);
+			put_pixel(env, x, y);
 		}
 	}
 }
