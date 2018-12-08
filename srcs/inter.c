@@ -78,32 +78,32 @@ double			inter_cone(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-t_obj			*inter_object(t_env *e,
+t_obj			*inter_object(t_env *env,
 		t_vector *ro, t_vector *rd, double *dmin)
 {
-	t_obj		*lobj;
+	t_obj		*lam_obj;
 	t_obj		*obj;
 	double		tmp;
 
 	obj = NULL;
-	lobj = e->obj;
+	lam_obj = env->obj;
 	tmp = *dmin;
-	while (lobj)
+	while (lam_obj)
 	{
-		if (lobj->type == 0)
-			tmp = inter_plane(lobj, ro, rd);
-		else if (lobj->type == 1)
-			tmp = inter_sphere(lobj, ro, rd);
-		else if (lobj->type == 2)
-			tmp = inter_cylinder(lobj, ro, rd);
-		else if (lobj->type == 3)
-			tmp = inter_cone(lobj, ro, rd);
+		if (lam_obj->type == 0)
+			tmp = inter_plane(lam_obj, ro, rd);
+		else if (lam_obj->type == 1)
+			tmp = inter_sphere(lam_obj, ro, rd);
+		else if (lam_obj->type == 2)
+			tmp = inter_cylinder(lam_obj, ro, rd);
+		else if (lam_obj->type == 3)
+			tmp = inter_cone(lam_obj, ro, rd);
 		if (tmp > 0.0001 && tmp < *dmin)
 		{
-			obj = lobj;
+			obj = lam_obj;
 			*dmin = tmp;
 		}
-		lobj = lobj->next;
+		lam_obj = lam_obj->next;
 	}
 	return (obj);
 }

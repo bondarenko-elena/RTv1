@@ -48,7 +48,7 @@ double			phong(t_obj *obj, t_vector *nor, t_vector *rd, t_vector *pos)
 	return (phong);
 }
 
-t_vector		setnor(t_obj *obj, t_vector *pos)
+t_vector		set_normal(t_obj *obj, t_vector *pos)
 {
 	t_vector	nor;
 
@@ -63,80 +63,80 @@ t_vector		setnor(t_obj *obj, t_vector *pos)
 	return (nor);
 }
 
-double			get_shadows(t_env *e, t_vector *pos)
+double			get_shadows(t_env *env, t_vector *pos)
 {
 	t_obj		*obj;
-	double		sha;
+	double		shadow;
 	double		tmp;
 
-	obj = e->obj;
-	sha = 1.0;
+	obj = env->obj;
+	shadow = 1.0;
 	while (obj)
 	{
 		if (obj->type == 4)
 		{
-			tmp = inter_shadows(e, pos, &obj->pos);
+			tmp = inter_shadows(env, pos, &obj->pos);
 			if (tmp == 1)
-				sha -= (obj->power + e->ln) / 2.0;
+				shadow -= (obj->power + env->ln) / 2.0;
 		}
 		obj = obj->next;
 	}
-	return (ft_clamp(sha, 0.0, 1.0));
+	return (ft_clamp(shadow, 0.0, 1.0));
 }
 
-t_vector		get_diff(t_env *e, t_vector *pos, t_vector *nor)
+t_vector		get_diff(t_env *env, t_vector *pos, t_vector *normal)
 {
 	t_obj		*obj;
-	t_vector	lig;
-	t_vector	lig_tmp;
+	t_vector	light;
+	t_vector	light_tmp;
 
-	obj = e->obj;
-	lig = (t_vector){0.0, 0.0, 0.0};
+	obj = env->obj;
+	light = (t_vector){0.0, 0.0, 0.0};
 	while (obj)
 	{
 		if (obj->type == 4)
 		{
-			lig_tmp = lambert(obj, nor, pos);
-			lig = vector_add(&lig, &lig_tmp);
+			light_tmp = lambert(obj, normal, pos);
+			light = vector_add(&light, &light_tmp);
 		}
 		obj = obj->next;
 	}
-	lig = vector_op_multiply(&lig, e->ln);
-	vector_clamp(&lig, 0.0, 1.0);
-	return (lig);
+	light = vector_op_multiply(&light, env->ln);
+	vector_clamp(&light, 0.0, 1.0);
+	return (light);
 }
 
-t_vector		get_spe(t_env *e, t_vector *pos, t_vector *nor)
+t_vector		get_spe(t_env *env, t_vector *pos, t_vector *normal)
 {
 	t_obj		*obj;
 	t_vector	spe;
 
-	obj = e->obj;
+	obj = env->obj;
 	spe = (t_vector){0.0, 0.0, 0.0};
 	while (obj)
 	{
 		if (obj->type == 4)
-			spe = vector_op_add(&spe, phong(obj, nor, &e->rd, pos));
+			spe = vector_op_add(&spe, phong(obj, normal, &env->rd, pos));
 		obj = obj->next;
 	}
 	vector_clamp(&spe, 0.0, 1.0);
 	return (spe);
 }
 
-void			get_lighting(t_env *e, t_vector *col, t_vector *pos)
+void			get_lighting(t_env *light_tmp, t_vector *col, t_vector *pos)
 {
-	double		sha;
+	double		shadow;
 	t_vector	spe;
-	t_vector	lig;
-	t_vector	nor;
+	t_vector	light;
+	t_vector	normal;
 
-	nor = setnor(e->objs, pos);
-	sha = get_shadows(e, pos);
-	lig = get_diff(e, pos, &nor);
-	spe = get_spe(e, pos, &nor);
-	lig = vector_op_multiply(&lig, sha);
-	spe = vector_multiply(&spe, &lig);
+	normal = set_normal(light_tmp->objs, pos);
+	shadow = get_shadows(light_tmp, pos);
+	light = get_diff(light_tmp, pos, &normal);
+	spe = get_spe(light_tmp, pos, &normal);
+	light = vector_op_multiply(&light, shadow);
+	spe = vector_multiply(&spe, &light);
 	*col = vector_add(col, &spe);
 	vector_clamp(col, 0.0, 1.0);
-	*col = vector_multiply(col, &lig);
+	*col = vector_multiply(col, &light);
 }
