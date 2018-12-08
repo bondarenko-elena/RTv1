@@ -24,6 +24,8 @@ SRC := display.c \
 		reader.c \
 		shadows.c \
 		fresher.c \
+		gets.c \
+		gets_p2.c \
 
 CC := gcc
 SRC := $(addprefix srcs/,$(SRC))

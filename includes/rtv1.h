@@ -76,5 +76,9 @@ void					get_color(char *content, t_obj *obj);
 void					free_tab_char(char **line, int size);
 void					get_render(t_env *env, char *content);
 void 					get_name(t_env *env, char *content);
+void					get_scene(t_env *env, t_list *list);
+void					get_content(t_env *env, t_list *list);
+int						convert_obj_type(t_env *env, char *type);
+void					get_obj_content(t_list *list, t_obj *obj);
 
 #endif
