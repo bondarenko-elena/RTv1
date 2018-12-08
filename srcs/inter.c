@@ -12,7 +12,7 @@
 
 #include "../includes/rtv1.h"
 
-double			isphere(t_obj *obj, t_vector *ro, t_vector *rd)
+double			inter_sphere(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
 	double		a;
@@ -30,7 +30,7 @@ double			isphere(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-double			iplane(t_obj *obj, t_vector *ro, t_vector *rd)
+double			inter_plane(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	double		t;
 
@@ -42,7 +42,7 @@ double			iplane(t_obj *obj, t_vector *ro, t_vector *rd)
 	return (t);
 }
 
-double			icylinder(t_obj *obj, t_vector *ro, t_vector *rd)
+double			inter_cylinder(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
 	double		a;
@@ -60,7 +60,7 @@ double			icylinder(t_obj *obj, t_vector *ro, t_vector *rd)
 	return ((-b - sqrt(h)) / a);
 }
 
-double			icone(t_obj *obj, t_vector *ro, t_vector *rd)
+double			inter_cone(t_obj *obj, t_vector *ro, t_vector *rd)
 {
 	t_vector	oc;
 	double		a;
@@ -91,13 +91,13 @@ t_obj			*inter_object(t_env *e,
 	while (lobj)
 	{
 		if (lobj->type == 0)
-			tmp = iplane(lobj, ro, rd);
+			tmp = inter_plane(lobj, ro, rd);
 		else if (lobj->type == 1)
-			tmp = isphere(lobj, ro, rd);
+			tmp = inter_sphere(lobj, ro, rd);
 		else if (lobj->type == 2)
-			tmp = icylinder(lobj, ro, rd);
+			tmp = inter_cylinder(lobj, ro, rd);
 		else if (lobj->type == 3)
-			tmp = icone(lobj, ro, rd);
+			tmp = inter_cone(lobj, ro, rd);
 		if (tmp > 0.0001 && tmp < *dmin)
 		{
 			obj = lobj;

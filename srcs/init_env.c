@@ -12,7 +12,7 @@
 
 #include "../includes/rtv1.h"
 
-void	pre_init_env(t_env *env)
+void	init_env_pre(t_env *env)
 {
 	env->mlx_init = mlx_init();
 	env->screen_name = "RTv1@4olbondar";
@@ -25,7 +25,7 @@ void	pre_init_env(t_env *env)
 	env->ln = 0;
 }
 
-void	post_init_env(t_env *env)
+void	init_env_post(t_env *env)
 {
 	env->window = mlx_new_window(env->mlx_init,
 			env->screen_width, env->screen_height, env->screen_name);

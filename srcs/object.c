@@ -38,11 +38,11 @@ void	init_obj(t_obj *obj)
 	obj->color = (t_vector){0.5, 0.5, 0.5};
 }
 
-void	obj_push_back(t_env *e, t_obj *obj)
+void	obj_push_back(t_env *env, t_obj *obj)
 {
 	t_obj	*cur;
 
-	cur = e->obj;
+	cur = env->obj;
 	if (cur)
 	{
 		while (cur->next)
@@ -50,5 +50,5 @@ void	obj_push_back(t_env *e, t_obj *obj)
 		cur->next = new_obj(obj);
 	}
 	else
-		e->obj = new_obj(obj);
+		env->obj = new_obj(obj);
 }

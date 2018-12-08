@@ -74,10 +74,10 @@ void			display(t_env *e)
 		x = -1;
 		while (++x < e->screen_width)
 		{
-			e->col = ray_tracing(e, x, y);
-			e->col = (t_vector){pow(e->col.x, GAMMA),
-				pow(e->col.y, GAMMA), e->col.z = pow(e->col.z, GAMMA)};
-			vector_clamp(&e->col, 0.0, 1.0);
+			e->color = ray_tracing(e, x, y);
+			e->color = (t_vector){pow(e->color.x, GAMMA),
+				pow(e->color.y, GAMMA), e->color.z = pow(e->color.z, GAMMA)};
+			vector_clamp(&e->color, 0.0, 1.0);
 			put_pixel(e, x, y);
 		}
 	}

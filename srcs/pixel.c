@@ -12,12 +12,12 @@
 
 #include "../includes/rtv1.h"
 
-void	put_pixel(t_env *e, int x, int y)
+void	put_pixel(t_env *env, int x, int y)
 {
 	int		color;
 
-	color = (int)(e->col.z * 256) % 256;
-	color += ((int)(e->col.y * 256) % 256) * 256;
-	color += ((int)(e->col.x * 256) % 256) * 256 * 256;
-	mlx_pixel_put(e->mlx_init, e->window, x, y, color);
+	color = (int)(env->color.z * 256) % 256;
+	color += ((int)(env->color.y * 256) % 256) * 256;
+	color += ((int)(env->color.x * 256) % 256) * 256 * 256;
+	mlx_pixel_put(env->mlx_init, env->window, x, y, color);
 }

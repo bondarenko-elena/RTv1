@@ -12,7 +12,7 @@
 
 #include "../includes/rtv1.h"
 
-int				ssphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				shadow_sphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
 	double		a;
@@ -33,7 +33,7 @@ int				ssphere(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-int				scylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				shadow_cylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
 	double		a;
@@ -54,7 +54,7 @@ int				scylinder(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 	return (0);
 }
 
-int				scone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
+int				shadow_cone(t_obj *obj, t_vector *ro, t_vector *rd, double tmin)
 {
 	t_vector	oc;
 	double		a;
@@ -92,11 +92,11 @@ double			inter_shadows(t_env *e, t_vector *pos, t_vector *lpos)
 	while (lobj)
 	{
 		if (lobj->type == 1)
-			tmp = ssphere(lobj, pos, &light, l);
+			tmp = shadow_sphere(lobj, pos, &light, l);
 		else if (lobj->type == 2)
-			tmp = scylinder(lobj, pos, &light, l);
+			tmp = shadow_cylinder(lobj, pos, &light, l);
 		else if (lobj->type == 3)
-			tmp = scone(lobj, pos, &light, l);
+			tmp = shadow_cone(lobj, pos, &light, l);
 		sha = (tmp == 1 ? 1 : sha);
 		lobj = lobj->next;
 	}

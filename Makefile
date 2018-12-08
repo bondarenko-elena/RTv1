@@ -13,7 +13,7 @@
 NAME := RTv1
 
 SRC := display.c \
-		init_environment.c \
+		init_env.c \
 		hooks.c \
 		inter.c \
 		light.c \

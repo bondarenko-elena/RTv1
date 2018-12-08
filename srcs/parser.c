@@ -44,8 +44,8 @@ void			get_vector(t_vector *vec, char *content)
 		vec->y = ft_atoi(content_splitted[1]);
 		vec->z = ft_atoi(content_splitted[2]);
 		free_tab_char(content_splitted, 2);
+		free(content);
 	}
-	// free(content);
 }
 
 void			get_double(t_obj *obj, char *content, int check)
@@ -57,7 +57,7 @@ void			get_double(t_obj *obj, char *content, int check)
 		else if (check == 1)
 			obj->power = ft_clamp(ft_atoi(content), 0.0, 99.0);
 	}
-	// free(content);
+	free(content);
 }
 
 void			get_color(char *content, t_obj *obj)
@@ -72,7 +72,7 @@ void			get_color(char *content, t_obj *obj)
 		obj->color.y = ft_clamp(ft_atoi(content_splitted[1]) / 256.0, 0.0, 1.0);
 		obj->color.z = ft_clamp(ft_atoi(content_splitted[2]) / 256.0, 0.0, 1.0);
 		free_tab_char(content_splitted, 2);
-		// free(content);
+		free(content);
 	}
 }
 
@@ -85,33 +85,28 @@ void			get_obj_info(t_list *list, t_obj *obj)
 	{
 		tmp = ft_strconc(list->content, '(', ')');
 		get_color(tmp, obj);
-		free(tmp);
 	}
 	else if (ft_strstr(list->content, "size"))
 	{
 		tmp = ft_strconc(list->content, '(', ')');
 		get_double(obj, tmp, 0);
-		free(tmp);
 	}
 	else if (ft_strstr(list->content, "pos"))
 	{
 		tmp = ft_strconc(list->content, '(', ')');
 		get_vector(&vec, tmp);
 		obj->pos = vec;
-		free(tmp);
 	}
 	else if (ft_strstr(list->content, "rot"))
 	{
 		tmp = ft_strconc(list->content, '(', ')');
 		get_vector(&vec, tmp);
 		obj->rot = vec;
-		free(tmp);
 	}
 	else if (ft_strstr(list->content, "power"))
 	{
 		tmp = ft_strconc(list->content, '(', ')');
 		get_double(obj, tmp, 1);
-		free(tmp);
 	}
 }
 
