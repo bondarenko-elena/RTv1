@@ -51,11 +51,13 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -rf $(OBJ)
+	@echo "\033[32mOK.\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
 	@make fclean -C libft
 
 re: fclean all
+	@echo "\033[32mOK.\033[0m"
 
 .PHONY: create_lib all clean fclean re
