@@ -48,7 +48,7 @@ double			get_shadows(t_env *env, t_vector *pos)
 	return (ft_clamp(shadow, 0.0, 1.0));
 }
 
-t_vector		get_diff(t_env *env, t_vector *pos, t_vector *normal)
+t_vector		get_diffuse(t_env *env, t_vector *pos, t_vector *normal)
 {
 	t_obj		*obj;
 	t_vector	light;
@@ -70,7 +70,7 @@ t_vector		get_diff(t_env *env, t_vector *pos, t_vector *normal)
 	return (light);
 }
 
-t_vector		get_spe(t_env *env, t_vector *pos, t_vector *normal)
+t_vector		get_specular(t_env *env, t_vector *pos, t_vector *normal)
 {
 	t_obj		*obj;
 	t_vector	spe;
@@ -96,8 +96,8 @@ void			get_lighting(t_env *light_tmp, t_vector *col, t_vector *pos)
 
 	normal = set_normal(light_tmp->objs, pos);
 	shadow = get_shadows(light_tmp, pos);
-	light = get_diff(light_tmp, pos, &normal);
-	spe = get_spe(light_tmp, pos, &normal);
+	light = get_diffuse(light_tmp, pos, &normal);
+	spe = get_specular(light_tmp, pos, &normal);
 	light = vector_op_multiply(&light, shadow);
 	spe = vector_multiply(&spe, &light);
 	*col = vector_add(col, &spe);

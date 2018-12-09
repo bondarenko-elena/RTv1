@@ -23,10 +23,6 @@
 
 // debian --> # define ESC 65307
 # define ESC 53
-# define S 115
-# define W 119
-# define A 97
-# define D 100
 # define FOV 2.0
 # define GAMMA 1.0
 # define HEIGHT 900
@@ -78,8 +74,8 @@ void				get_content(t_env *env, t_list *list);
 void				get_scene(t_env *env, t_list *list);
 void				get_name(t_env *env, char *content);
 double				get_shadows(t_env *env, t_vector *pos);
-t_vector			get_diff(t_env *env, t_vector *pos, t_vector *normal);
-t_vector			get_spe(t_env *env, t_vector *pos, t_vector *normal);
+t_vector			get_diffuse(t_env *env, t_vector *pos, t_vector *normal);
+t_vector			get_specular(t_env *env, t_vector *pos, t_vector *normal);
 void				get_lighting(t_env *light_tmp,
 						t_vector *col, t_vector *pos);
 void				get_obj_content(t_list *list, t_obj *obj);
