@@ -43,7 +43,7 @@ create_lib:
 	@make -C libft
 
 $(NAME): $(OBJ)
-	@gcc -o $(NAME) $(OBJ) libft/libft.a -L $(LIBMLX) $(FRAMEWS)
+	@CC -o $(NAME) $(OBJ) libft/libft.a -L $(LIBMLX) $(FRAMEWS)
 	@echo "\033[32mRTv1 is ready.\033[0m"
 
 %.o: %.c
