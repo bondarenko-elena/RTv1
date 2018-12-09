@@ -14,17 +14,17 @@
 
 t_vector		set_normal(t_obj *obj, t_vector *pos)
 {
-	t_vector	nor;
+	t_vector	normal;
 
-	nor = (t_vector){0.0, 1.0, 0.0};
+	normal = (t_vector){0.0, 1.0, 0.0};
 	if (obj->type == 1)
-		nor = vector_substract(pos, &obj->pos);
+		normal = vector_substract(pos, &obj->pos);
 	else if (obj->type == 2)
-		nor = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
+		normal = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
 	else if (obj->type == 3)
-		nor = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
-	vector_normalization(&nor);
-	return (nor);
+		normal = (t_vector){pos->x - obj->pos.x, 0.0, pos->z - obj->pos.z};
+	vector_normalization(&normal);
+	return (normal);
 }
 
 double			get_shadows(t_env *env, t_vector *pos)
@@ -73,34 +73,34 @@ t_vector		get_diffuse(t_env *env, t_vector *pos, t_vector *normal)
 t_vector		get_specular(t_env *env, t_vector *pos, t_vector *normal)
 {
 	t_obj		*obj;
-	t_vector	spe;
+	t_vector	specular;
 
 	obj = env->obj;
-	spe = (t_vector){0.0, 0.0, 0.0};
+	specular = (t_vector){0.0, 0.0, 0.0};
 	while (obj)
 	{
 		if (obj->type == 4)
-			spe = vector_op_add(&spe, phong(obj, normal, &env->rd, pos));
+			specular = vector_op_add(&specular, phong(obj, normal, &env->rd, pos));
 		obj = obj->next;
 	}
-	vector_clamp(&spe, 0.0, 1.0);
-	return (spe);
+	vector_clamp(&specular, 0.0, 1.0);
+	return (specular);
 }
 
 void			get_lighting(t_env *light_tmp, t_vector *col, t_vector *pos)
 {
 	double		shadow;
-	t_vector	spe;
+	t_vector	specular;
 	t_vector	light;
 	t_vector	normal;
 
 	normal = set_normal(light_tmp->objs, pos);
 	shadow = get_shadows(light_tmp, pos);
 	light = get_diffuse(light_tmp, pos, &normal);
-	spe = get_specular(light_tmp, pos, &normal);
+	specular = get_specular(light_tmp, pos, &normal);
 	light = vector_op_multiply(&light, shadow);
-	spe = vector_multiply(&spe, &light);
-	*col = vector_add(col, &spe);
+	specular = vector_multiply(&specular, &light);
+	*col = vector_add(col, &specular);
 	vector_clamp(col, 0.0, 1.0);
 	*col = vector_multiply(col, &light);
 }
