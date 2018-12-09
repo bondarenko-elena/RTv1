@@ -16,15 +16,19 @@ t_obj	*new_obj(t_obj *obj)
 {
 	t_obj	*ret;
 
-	ret = (t_obj*)malloc(sizeof(t_obj));
-	if (ret == NULL)
+	ret = NULL;
+	if ((ret = (t_obj*)malloc(sizeof(t_obj))) != NULL)
+	{
+		ret->type = obj->type;
+		ret->size = obj->size / 100.0;
+		ret->power = obj->power / 100.0;
+		ret->pos = obj->pos;
+		ret->rot = obj->rot;
+		ret->color = obj->color;
+		ret->next = NULL;
+	}
+	else
 		exit_w_error("new_obj: malloc error");
-	ret->type = obj->type;
-	ret->size = obj->size / 100.0;
-	ret->power = obj->power / 100.0;
-	ret->pos = obj->pos;
-	ret->rot = obj->rot;
-	ret->color = obj->color;
 	return (ret);
 }
 
@@ -40,14 +44,14 @@ void	init_obj(t_obj *obj)
 
 void	obj_push_back(t_env *env, t_obj *obj)
 {
-	t_obj	*cur;
+	t_obj	*curr;
 
-	cur = env->obj;
-	if (cur)
+	curr = env->obj;
+	if (curr)
 	{
-		while (cur->next)
-			cur = cur->next;
-		cur->next = new_obj(obj);
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new_obj(obj);
 	}
 	else
 		env->obj = new_obj(obj);

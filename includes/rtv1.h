@@ -29,8 +29,8 @@
 # define D 100
 # define FOV 2.0
 # define GAMMA 1.0
-# define HEIGHT 1680
-# define WIDTH 900
+# define HEIGHT 900
+# define WIDTH 1680
 
 typedef struct		s_obj
 {
