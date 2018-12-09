@@ -12,17 +12,17 @@
 
 #include "../includes/rtv1.h"
 
-int				convert_obj_type(t_env *env, char *type)
+int				convert_obj_type(t_env *env, char *check)
 {
-	if (ft_strstr(type, "plane"))
+	if (ft_strstr(check, "plane"))
 		return (0);
-	else if (ft_strstr(type, "sphere"))
+	else if (ft_strstr(check, "sphere"))
 		return (1);
-	else if (ft_strstr(type, "cylinder"))
+	else if (ft_strstr(check, "cylinder"))
 		return (2);
-	else if (ft_strstr(type, "cone"))
+	else if (ft_strstr(check, "cone"))
 		return (3);
-	else if (ft_strstr(type, "light"))
+	else if (ft_strstr(check, "light"))
 	{
 		env->ln += 1.0;
 		return (4);
