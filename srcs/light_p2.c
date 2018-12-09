@@ -80,7 +80,8 @@ t_vector		get_specular(t_env *env, t_vector *pos, t_vector *normal)
 	while (obj)
 	{
 		if (obj->type == 4)
-			specular = vector_op_add(&specular, phong(obj, normal, &env->rd, pos));
+			specular = vector_op_add(&specular,
+				phong(obj, normal, &env->rd, pos));
 		obj = obj->next;
 	}
 	vector_clamp(&specular, 0.0, 1.0);

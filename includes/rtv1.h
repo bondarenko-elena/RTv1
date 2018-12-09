@@ -101,7 +101,7 @@ void				parse_file(t_env *env, t_list *list);
 void				put_pixel(t_env *env, int x, int y);
 t_vector			ray_tracing(t_env *env, double x, double y);
 int					red_cross(t_env *env);
-void				set_cam(t_env *env, double x, double y);
+void				set_camera(t_env *env, double x, double y);
 t_vector			set_normal(t_obj *obj, t_vector *pos);
 int					shadow_sphere(t_obj *obj,
 						t_vector *ro, t_vector *rd, double tmin);

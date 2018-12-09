@@ -34,7 +34,7 @@ t_vector		get_obj_color(t_env *env,
 	return (*color);
 }
 
-void			set_cam(t_env *env, double x, double y)
+void			set_camera(t_env *env, double x, double y)
 {
 	double		u;
 	double		v;
@@ -59,7 +59,7 @@ t_vector		ray_tracing(t_env *env, double x, double y)
 {
 	t_vector	color;
 
-	set_cam(env, x, y);
+	set_camera(env, x, y);
 	color = (t_vector){0.0, 0.0, 0.0};
 	color = get_obj_color(env, &env->ro, &env->rd, &color);
 	return (color);
