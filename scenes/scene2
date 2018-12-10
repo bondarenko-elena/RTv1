@@ -11,7 +11,7 @@ content
 	object(light)
 	{
 		pos(25 1 0)
-		power(80);
+		power(80)
 	}
 	object(sphere)
 	{
